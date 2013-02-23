@@ -9,12 +9,12 @@
     ],
     "require": {
         "php": ">=5.3.7",
-        "johnshopkins/http-exchange": "0.*",
-        "johnshopkins/cache-exchange": "0.*"
+        "slim/slim": "2.2.0",
+        "jenwachter/router-exchange": "dev-master"
     },
     "autoload": {
         "psr-0" : {
-            "HtmlForm" : "src/"
+            "app": ""
         }
     }
 }
