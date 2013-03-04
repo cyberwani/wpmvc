@@ -1,8 +1,11 @@
 <?php
 
-namespace app\Controller;
+namespace app\Controllers;
 
 class Base
 {
-
+	public function __construct($options)
+	{
+		
+	}
 }
