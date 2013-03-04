@@ -3,18 +3,11 @@
 // Composer autoload
 require __DIR__ . "/vendor/autoload.php";
 
-// Setup Router
-$adapter = new \RouterExchange\Adapters\Slim(new \Slim\Slim());
-$router = new \RouterExchange\Router($adapter);
+// Bootstrap WordPress
+define("WP_USE_THEMES", false);
+require __DIR__ . "/public_html/wp/wp-blog-header.php";
 
-// Routes
-$router->get("/:year/:month/:day/:slug", function ($year, $month, $day, $slug) {
-	echo "this is the {$slug} post.";
-	
-});
-
-$router->get("/:page", function ($page) {
-    echo "this is the {$page} page.";
-});
-
+// Routing
+$router = new \RouterExchange\Adapters\Slim(new \Slim\Slim());
+require __DIR__ . "/config/routes.php";
 $router->run();
