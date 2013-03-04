@@ -7,12 +7,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jenwachter/router-exchange.git",
-                "reference": "1f792b7ce3b37856d92d02e98d207f1f6973f2c7"
+                "reference": "e7906292f91bc86435f2fe88584cb141cd7d5812"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jenwachter/router-exchange/zipball/1f792b7ce3b37856d92d02e98d207f1f6973f2c7",
-                "reference": "1f792b7ce3b37856d92d02e98d207f1f6973f2c7",
+                "url": "https://api.github.com/repos/jenwachter/router-exchange/zipball/e7906292f91bc86435f2fe88584cb141cd7d5812",
+                "reference": "e7906292f91bc86435f2fe88584cb141cd7d5812",
                 "shasum": ""
             },
             "require": {
@@ -21,7 +21,7 @@
             "suggest": {
                 "slim/slim": "2.2.0"
             },
-            "time": "2013-02-23 19:55:27",
+            "time": "2013-03-04 18:05:39",
             "type": "library",
             "autoload": {
                 "psr-0": {
