@@ -5,8 +5,7 @@ namespace app\Models;
 class Page extends Base
 {
 	protected $slug;
-	public $data;
-
+	
 	public function __construct($options)
 	{
 		parent::__construct($options);
