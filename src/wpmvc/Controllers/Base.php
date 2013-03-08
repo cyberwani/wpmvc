@@ -6,19 +6,14 @@ class Base
 {
 	protected $template;
 
-	public function __construct($options)
+	public function __construct($template, $options = array())
 	{
-		
-	}
-
-	public function setTemplate($file)
-	{
-		$this->template($file);
+		$this->template = $template;
 	}
 
 	protected function render()
 	{
 		$data = $this->model->data;
-		include $template;
+		include $this->template;
 	}
 }
