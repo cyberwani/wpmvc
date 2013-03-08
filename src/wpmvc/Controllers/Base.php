@@ -9,5 +9,7 @@ class Base
 		
 	}
 
-	abstract protected function render();
+	protected function render() {
+		
+	}
 }
