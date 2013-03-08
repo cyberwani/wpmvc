@@ -9,4 +9,9 @@ class PostController extends Base
 		parent::__construct($options);
 		$model = new \wpmvc\Models\Post($options);
 	}
+
+	protected function render()
+	{
+		print_r($this->model->data);
+	}
 }

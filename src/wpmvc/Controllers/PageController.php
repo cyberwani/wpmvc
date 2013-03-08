@@ -13,4 +13,9 @@ class PageController extends Base
 		$this->model->find();
 		$this->render();
 	}
+
+	protected function render()
+	{
+		print_r($this->model->data);
+	}
 }
