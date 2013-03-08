@@ -39,8 +39,8 @@ class Collection extends Base
 		if (is_callable($this->filterWhere)) {
 			remove_filter("posts_where", $this->filterWhere);
 		}
-
-		print_r($query->posts); die();
+		
+		$this->data = $query->posts;
 	}
 
 	protected function join($v, $char = ",")
