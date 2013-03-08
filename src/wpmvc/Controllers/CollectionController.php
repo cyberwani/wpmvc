@@ -13,10 +13,4 @@ class CollectionController extends Base
 		$this->model->collect();
 		$this->render();
 	}
-
-	protected function render()
-	{
-		$data = $this->model->data;
-		require dirname(__DIR__) . "/views/collection.php";
-	}
 }

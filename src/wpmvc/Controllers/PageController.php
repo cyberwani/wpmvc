@@ -13,10 +13,4 @@ class PageController extends Base
 		$this->model->find();
 		$this->render();
 	}
-
-	protected function render()
-	{
-		$data = $this->model->data;
-		require dirname(__DIR__) . "/views/page.php";
-	}
 }
