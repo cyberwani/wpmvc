@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Controllers;
+namespace wpmvc\Controllers;
 
 class CollectionController extends Base
 {
@@ -9,7 +9,7 @@ class CollectionController extends Base
 	public function __construct($options = array())
 	{
 		parent::__construct($options);
-		$this->model = new \app\Models\Collection($options);
+		$this->model = new \wpmvc\Models\Collection($options);
 		$this->model->collect();
 		$this->render();
 	}

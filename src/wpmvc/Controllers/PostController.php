@@ -1,12 +1,12 @@
 <?php
 
-namespace app\Controllers;
+namespace wpmvc\Controllers;
 
 class PostController extends Base
 {
 	public function __construct($options)
 	{
 		parent::__construct($options);
-		$model = new \app\Models\Post($options);
+		$model = new \wpmvc\Models\Post($options);
 	}
 }

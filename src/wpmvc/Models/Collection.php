@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Models;
+namespace wpmvc\Models;
 
 class Collection extends Base
 {

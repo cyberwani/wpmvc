@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Controllers;
+namespace wpmvc\Controllers;
 
 class Base
 {

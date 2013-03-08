@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Controllers;
+namespace wpmvc\Controllers;
 
 class PageController extends Base
 {
@@ -9,7 +9,7 @@ class PageController extends Base
 	public function __construct($options)
 	{
 		parent::__construct($options);
-		$this->model = new \app\Models\Page($options);
+		$this->model = new \wpmvc\Models\Page($options);
 		$this->model->find();
 		$this->render();
 	}

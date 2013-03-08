@@ -1,5 +1,9 @@
 {
-    "name": "jenwachter/website",
+    "name": "jenwachter/wpmvc",
+    "description": "A lightweight PHP framework to use WordPress as MVC.",
+    "keywords": ["wordpress", "mvc"],
+    "homepage": "https://github.com/jenwachter/wpmvc",
+    "license": "MIT",
     "authors": [
         {
             "name": "Jen Wachter",
@@ -9,12 +13,14 @@
     ],
     "require": {
         "php": ">=5.3.7",
-        "slim/slim": "2.2.0",
         "jenwachter/router-exchange": "dev-master"
+    },
+    "suggest": {
+         "slim/slim": "2.2.0"
     },
     "autoload": {
         "psr-0" : {
-            "app": ""
+            "wpmvc" : "src/"
         }
     }
 }
