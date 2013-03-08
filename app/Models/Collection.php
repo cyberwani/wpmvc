@@ -107,8 +107,8 @@ class Collection extends Base
 	protected function build__time($v)
 	{
 		if (is_array($v)) {
-			$this->filterWhere = function() use ($v) {
-				$where = " AND post_date >= '{$v[0]}' AND post_date < '{$v[1]}'";
+			$this->filterWhere = function($where = "") use ($v) {
+				$where .= " AND post_date >= '{$v[0]}' AND post_date < '{$v[1]}'";
 				return $where;
 			};
 
