@@ -13,9 +13,4 @@ class CollectionController extends Base
 		$this->model->collect();
 		$this->render();
 	}
-
-	protected function render()
-	{
-		print_r($this->model->data);
-	}
 }
