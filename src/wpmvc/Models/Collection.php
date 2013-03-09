@@ -4,43 +4,25 @@ namespace wpmvc\Models;
 
 class Collection extends Base
 {
-	/**
-	 * Query arguments formatted for WordPress
-	 * @var array
-	 */
 	protected $queryArgs = array(
 		"post_type" => "post",
 		"posts_per_page" => 10
 	);
 
-	protected $filterWhere;
-
 	public function __construct($options)
 	{
 		parent::__construct($options);
+	}
 
-		foreach ($options as $k => $v) {
+	protected function buildQueryArgs()
+	{
+		foreach ($this->options as $k => $v) {
 
 			$method = "build__{$k}";
 			if (method_exists($this, $method)) {
 				$this->$method($v);
 			}
 		}
-	}
-	
-	public function collect()
-	{
-		if (is_callable($this->filterWhere)) {
-			add_filter("posts_where", $this->filterWhere);
-		}
-
-		$query = new \WP_Query($this->queryArgs);
-
-		if (is_callable($this->filterWhere)) {
-			remove_filter("posts_where", $this->filterWhere);
-		}
-		
-		$this->data = $query->posts;
 	}
 
 	protected function join($v, $char = ",")

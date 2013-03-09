@@ -10,10 +10,10 @@ class Page extends Base
 	{
 		parent::__construct($options);
 	}
-	
-	public function find()
+
+	protected function buildQueryArgs()
 	{
-		$slug = implode("/", $this->slug);
-		$this->data = get_page_by_path($slug);
+		$this->queryArgs["post_type"] = "page";
+		$this->queryArgs["pagename"] = implode("/", $this->slug);
 	}
 }
