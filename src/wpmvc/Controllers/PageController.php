@@ -4,13 +4,13 @@ namespace wpmvc\Controllers;
 
 class PageController extends Base
 {
-	protected $model;
+	protected $modelName = "Page";
 
 	public function __construct($template, $options = array())
 	{
 		parent::__construct($template, $options);
-		$this->model = new \wpmvc\Models\Page($options);
-		$this->model->find();
+
+		$this->model->findOne();
 		$this->render();
 	}
 }
