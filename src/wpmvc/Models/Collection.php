@@ -5,8 +5,7 @@ namespace wpmvc\Models;
 class Collection extends Base
 {
 	protected $queryArgs = array(
-		"post_type" => "post",
-		"posts_per_page" => 10
+		"post_type" => "post"
 	);
 
 	public function __construct($options)
@@ -83,7 +82,7 @@ class Collection extends Base
 
 	protected function build__sticky($v)
 	{
-		$this->queryArgs["ignore_sticky_posts"] = $v;
+		$this->queryArgs["ignore_sticky_posts"] = !$v;
 	}
 
 	protected function build__time($v)
