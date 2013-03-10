@@ -10,7 +10,7 @@ class CollectionController extends Base
 	{
 		parent::__construct($template, $options);
 
-		$this->model->findAll();
+		$this->model->findMany();
 		$this->render();
 	}
 }

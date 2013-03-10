@@ -32,7 +32,7 @@ class Base
 		$this->data = array_shift($resultset);
 	}
 
-	public function findAll()
+	public function findMany()
 	{
 		$resultset = $this->find();
 		$this->data = $resultset;
