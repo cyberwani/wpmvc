@@ -44,6 +44,8 @@ abstract class Base
 	 * day {int}			Retrieves content published on a specific day of the month
 	 * 						(1-31).
 	 *
+	 * id {int}				Post or page ID.
+	 *
 	 * month {int}			Retrieves content published during a specific month (1-12)
 	 * 
 	 * order {string}		Sets the ascending or descending order of the results

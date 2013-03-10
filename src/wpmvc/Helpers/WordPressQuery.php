@@ -73,6 +73,11 @@ class WordPressQuery
 		$this->queryArgs["day"] = $v;
 	}
 
+	protected function build__id($v)
+	{
+		$this->queryArgs["id"] = $v;
+	}
+
 	protected function build__month($v)
 	{
 		$this->queryArgs["monthnum"] = $v;
@@ -119,14 +124,9 @@ class WordPressQuery
 		$this->queryArgs["tag__in"] = $v;
 	}
 
-	protected function build__type($v)
-	{
-		$this->queryArgs["post_type"] = $v;
-	}
-
 	protected function build__slug($v)
 	{
-		$this->queryArgs["page"] = $v;
+		$this->queryArgs["name"] = $v;
 	}
 
 	protected function build__time($v)
@@ -146,14 +146,9 @@ class WordPressQuery
 		}
 	}
 
-	protected function build__slug($v)
-	{
-		$this->queryArgs["name"] = $v;
-	}
-
 	protected function build__type($v)
 	{
-		$this->queryArgs["type"] = $v;
+		$this->queryArgs["post_type"] = $v;
 	}
 
 	protected function build__sticky($v)
