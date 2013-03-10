@@ -2,21 +2,36 @@
 
 namespace wpmvc\Helpers;
 
-/**
- * Takes (mostly) WordPress agnostic terms and
- * maps them to the WordPress WP_Query object.
- */
 class Query
 {
+	/**
+	 * WP_Query object-ready arguments
+	 * @var array
+	 */
 	public $queryArgs = array(
 		"fields" => "ids",
 		"posts_per_page" => 10
 	);
 
+	/**
+	 * Filter function used to alter the
+	 * WHERE statement of a query if
+	 * necessary.
+	 * @var callale
+	 */
 	protected $filterWhere;
 
+	/**
+	 * Resultset
+	 * @var array
+	 */
 	protected $results = array();
 
+	/**
+	 * Runs a query argument builder for each
+	 * option passed. 
+	 * @param array $options Key/value query options
+	 */
 	public function __construct($options = array())
 	{
 		foreach ($options as $k => $v) {
@@ -27,6 +42,10 @@ class Query
 		}
 	}
 
+	/**
+	 * Runs the query and returns the data to the model.
+	 * @return array Resultset
+	 */
 	public function run()
 	{
 		if (is_callable($this->filterWhere)) {
@@ -48,6 +67,11 @@ class Query
 		return $this->prepareData($this->results);
 	}
 
+	/**
+	 * Runs any necessary modifications on the resultset.
+	 * @param  array $results Resultset
+	 * @return array Modified resultset
+	 */
 	protected function prepareData($results)
 	{
 		foreach ($results as $item) {
@@ -56,6 +80,12 @@ class Query
 		return $results;
 	}
 
+	/**
+	 * Takes care of joining an array together into
+	 * a string (if needed)
+	 * @param  mixed $v String or array
+	 * @return string
+	 */
 	protected function join($v, $char = ",")
 	{
 		if (is_array($v)) {
@@ -64,79 +94,168 @@ class Query
 		return $v;
 	}
 
+	/**
+	 * Converts the author option into WP_Query friendly arguments.
+	 * @param  mixed $v String, integer or array of sting and integers.
+	 * @return $this
+	 */
 	protected function build__author($v)
 	{
 		$v = $this->join($v);
 		$this->queryArgs["author"] = $v;
+		return $this;
 	}
 
+	/**
+	 * Converts the category option into WP_Query friendly arguments.
+	 * @param  mixed $v String, integer or array of sting and integers.
+	 * @return $this
+	 */
 	protected function build__category($v)
 	{
 		$v = $this->join($v);
 		$this->queryArgs["category__in"] = $v;
+		return $this;
 	}
 
+	/**
+	 * Converts the day option into WP_Query friendly arguments.
+	 * @param  int $v
+	 * @return $this
+	 */
 	protected function build__day($v)
 	{
 		$this->queryArgs["day"] = $v;
+		return $this;
 	}
 
+	/**
+	 * Converts the id option into WP_Query friendly arguments.
+	 * @param  int $v
+	 * @return $this
+	 */
 	protected function build__id($v)
 	{
 		$this->queryArgs["id"] = $v;
+		return $this;
 	}
 
+	/**
+	 * Converts the month option into WP_Query friendly arguments.
+	 * @param  int $v
+	 * @return $this
+	 */
 	protected function build__month($v)
 	{
 		$this->queryArgs["monthnum"] = $v;
+		return $this;
 	}
 
+	/**
+	 * Converts the order option into WP_Query friendly arguments.
+	 * @param  string $v
+	 * @return $this
+	 */
 	protected function build__order($v)
 	{
 		$this->queryArgs["order"] = $v;
+		return $this;
 	}
 
+	/**
+	 * Converts the order_by option into WP_Query friendly arguments.
+	 * @param  string $v
+	 * @return $this
+	 */
 	protected function build__order_by($v)
 	{
 		$this->queryArgs["orderby"] = $v;
+		return $this;
 	}
 
+	/**
+	 * Converts the page option into WP_Query friendly arguments.
+	 * @param  int $v
+	 * @return $this
+	 */
 	protected function build__page($v)
 	{
 		$this->queryArgs["paged"] = $v;
+		return $this;
 	}
 
+	/**
+	 * Converts the pagination option into WP_Query friendly arguments.
+	 * @param  boolean $v
+	 * @return $this
+	 */
 	protected function build__pagination($v)
 	{
 		$this->queryArgs["nopaging"] = $v;
+		return $this;
 	}
 
+	/**
+	 * Converts the path option into WP_Query friendly arguments.
+	 * @param  array $v
+	 * @return $this
+	 */
 	protected function build__path($v)
 	{
 		$this->queryArgs["pagename"] = implode("/", $v);
+		return $this;
 	}
 
+	/**
+	 * Converts the permission option into WP_Query friendly arguments.
+	 * @param  string $v
+	 * @return $this
+	 */
 	protected function build__permission($v)
 	{
 		$this->queryArgs["perm"] = $v;
+		return $this;
 	}
 
+	/**
+	 * Converts the per_page option into WP_Query friendly arguments.
+	 * @param  int $v
+	 * @return $this
+	 */
 	protected function build__per_page($v)
 	{
 		$this->queryArgs["posts_per_page"] = $v;
+		return $this;
 	}
 
+	/**
+	 * Converts the tag option into WP_Query friendly arguments.
+	 * @param  mixed $v String, integer or array of sting and integers.
+	 * @return $this
+	 */
 	protected function build__tag($v)
 	{
 		$v = $this->join($v);
 		$this->queryArgs["tag__in"] = $v;
+		return $this;
 	}
 
+	/**
+	 * Converts the slug option into WP_Query friendly arguments.
+	 * @param  string $v
+	 * @return $this
+	 */
 	protected function build__slug($v)
 	{
 		$this->queryArgs["name"] = $v;
+		return $this;
 	}
 
+	/**
+	 * Converts the time option into WP_Query friendly arguments.
+	 * @param  mixed $v String or array
+	 * @return $this
+	 */
 	protected function build__time($v)
 	{
 		if (is_array($v)) {
@@ -152,20 +271,39 @@ class Query
 				$this->queryArgs[$timePeriods[$i]] = $v[$i];
 			}
 		}
+		return $this;
 	}
 
+	/**
+	 * Converts the type option into WP_Query friendly arguments.
+	 * @param  string $v
+	 * @return $this
+	 */
 	protected function build__type($v)
 	{
 		$this->queryArgs["post_type"] = $v;
+		return $this;
 	}
 
+	/**
+	 * Converts the sticky option into WP_Query friendly arguments.
+	 * @param  boolean $v
+	 * @return $this
+	 */
 	protected function build__sticky($v)
 	{
 		$this->queryArgs["ignore_sticky_posts"] = !$v;
+		return $this;
 	}
 
+	/**
+	 * Converts the year option into WP_Query friendly arguments.
+	 * @param  int $v
+	 * @return $this
+	 */
 	protected function build__year($v)
 	{
 		$this->queryArgs["year"] = $v;
+		return $this;
 	}
 }
