@@ -13,9 +13,7 @@ class Post extends Base
 	{
 		parent::__construct($options);
 
-		$this->queryArgs = array(
-			"name" => $this->slug,
-			"time" => "{$this->year}-{$this->month}-{$this->day}"
-		);
+		$this->queryArgs = $options;
+		$this->queryArgs["name"] = $this->slug;
 	}
 }

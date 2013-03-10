@@ -2,6 +2,10 @@
 
 namespace wpmvc\Helpers;
 
+/**
+ * Takes database agnostic terms and maps them
+ * to the WordPress WP_Query object.
+ */
 class WordPressQuery
 {
 	protected $passedArgs = array();
@@ -115,6 +119,21 @@ class WordPressQuery
 	protected function build__sticky($v)
 	{
 		$this->queryArgs["ignore_sticky_posts"] = !$v;
+	}
+
+	protected function build__year($v)
+	{
+		$this->queryArgs["year"] = $v;
+	}
+
+	protected function build__month($v)
+	{
+		$this->queryArgs["monthnum"] = $v;
+	}
+
+	protected function build__day($v)
+	{
+		$this->queryArgs["day"] = $v;
 	}
 
 	protected function build__time($v)
