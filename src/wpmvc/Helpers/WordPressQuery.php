@@ -3,8 +3,8 @@
 namespace wpmvc\Helpers;
 
 /**
- * Takes database agnostic terms and maps them
- * to the WordPress WP_Query object.
+ * Takes (mostly) WordPress agnostic terms and
+ * maps them to the WordPress WP_Query object.
  */
 class WordPressQuery
 {
@@ -62,46 +62,20 @@ class WordPressQuery
 		$this->queryArgs["author"] = $v;
 	}
 
-	protected function build__tag($v)
-	{
-		$v = $this->join($v);
-		$this->queryArgs["tag__in"] = $v;
-	}
-
 	protected function build__category($v)
 	{
 		$v = $this->join($v);
 		$this->queryArgs["category__in"] = $v;
 	}
 
-	protected function build__type($v)
+	protected function build__day($v)
 	{
-		$this->queryArgs["post_type"] = $v;
+		$this->queryArgs["day"] = $v;
 	}
 
-	protected function build__per_page($v)
+	protected function build__month($v)
 	{
-		$this->queryArgs["posts_per_page"] = $v;
-	}
-
-	protected function build__slug($v)
-	{
-		$this->queryArgs["page"] = $v;
-	}
-
-	protected function build__path($v)
-	{
-		$this->queryArgs["pagename"] = implode("/", $v);
-	}
-
-	protected function build__name($v)
-	{
-		$this->queryArgs["name"] = $v;
-	}
-
-	protected function build__pagination($v)
-	{
-		$this->queryArgs["nopaging"] = $v;
+		$this->queryArgs["monthnum"] = $v;
 	}
 
 	protected function build__order($v)
@@ -114,24 +88,45 @@ class WordPressQuery
 		$this->queryArgs["orderby"] = $v;
 	}
 
-	protected function build__sticky($v)
+	protected function build__page($v)
 	{
-		$this->queryArgs["ignore_sticky_posts"] = !$v;
+		$this->queryArgs["paged"] = $v;
 	}
 
-	protected function build__year($v)
+	protected function build__pagination($v)
 	{
-		$this->queryArgs["year"] = $v;
+		$this->queryArgs["nopaging"] = $v;
 	}
 
-	protected function build__month($v)
+	protected function build__path($v)
 	{
-		$this->queryArgs["monthnum"] = $v;
+		$this->queryArgs["pagename"] = implode("/", $v);
 	}
 
-	protected function build__day($v)
+	protected function build__permission($v)
 	{
-		$this->queryArgs["day"] = $v;
+		$this->queryArgs["perm"] = $v;
+	}
+
+	protected function build__per_page($v)
+	{
+		$this->queryArgs["posts_per_page"] = $v;
+	}
+
+	protected function build__tag($v)
+	{
+		$v = $this->join($v);
+		$this->queryArgs["tag__in"] = $v;
+	}
+
+	protected function build__type($v)
+	{
+		$this->queryArgs["post_type"] = $v;
+	}
+
+	protected function build__slug($v)
+	{
+		$this->queryArgs["page"] = $v;
 	}
 
 	protected function build__time($v)
@@ -151,8 +146,23 @@ class WordPressQuery
 		}
 	}
 
-	protected function build__permission($v)
+	protected function build__slug($v)
 	{
-		$this->queryArgs["perm"] = $v;
+		$this->queryArgs["name"] = $v;
+	}
+
+	protected function build__type($v)
+	{
+		$this->queryArgs["type"] = $v;
+	}
+
+	protected function build__sticky($v)
+	{
+		$this->queryArgs["ignore_sticky_posts"] = !$v;
+	}
+
+	protected function build__year($v)
+	{
+		$this->queryArgs["year"] = $v;
 	}
 }
