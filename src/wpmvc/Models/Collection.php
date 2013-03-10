@@ -7,6 +7,6 @@ class Collection extends Base
 	public function __construct($options)
 	{
 		parent::__construct($options);
-		$this->queryArgs = $options;
+		$this->options = $options;
 	}
 }

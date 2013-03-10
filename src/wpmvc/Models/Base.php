@@ -4,26 +4,30 @@ namespace wpmvc\Models;
 
 class Base
 {
+	/**
+	 * Modified version of options passed into
+	 * the model. Ready to be used in database
+	 * query adapter.
+	 * @var Associative array
+	 */
 	protected $options;
 
 	/**
-	 * Arguments send to Query helper. Arguments
-	 * are in wpmvc format; not wordpress.
-	 * @var associative array
+	 * Data retrieved from the model.
+	 * @var mixed Array or object
 	 */
-	protected $queryArgs;
-
 	public $data;
 	
 	public function __construct($options)
 	{
-		$this->options = $options;
+		
+	}
 
-		foreach ($options as $k => $v) {
-			if (property_exists($this, $k)) {
-				$this->$k = $v;
-			}
-		}
+	protected function find()
+	{
+		$query = new \wpmvc\Helpers\WordPressQuery($this->options);
+		$results = $query->run();
+		return $this->prepareData($results);
 	}
 
 	public function findOne()
@@ -36,13 +40,6 @@ class Base
 	{
 		$resultset = $this->find();
 		$this->data = $resultset;
-	}
-
-	protected function find()
-	{
-		$query = new \wpmvc\Helpers\WordPressQuery($this->queryArgs);
-		$results = $query->run();
-		return $this->prepareData($results);
 	}
 
 	protected function prepareData($results)

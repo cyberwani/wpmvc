@@ -8,8 +8,6 @@ namespace wpmvc\Helpers;
  */
 class WordPressQuery
 {
-	protected $passedArgs = array();
-
 	public $queryArgs = array(
 		"fields" => "ids",
 		"posts_per_page" => 10
@@ -19,9 +17,9 @@ class WordPressQuery
 
 	protected $results = array();
 
-	public function __construct($passedArgs)
+	public function __construct($options = array())
 	{
-		foreach ($passedArgs as $k => $v) {
+		foreach ($options as $k => $v) {
 			$method = "build__{$k}";
 			if (method_exists($this, $method)) {
 				$this->$method($v);
@@ -86,14 +84,14 @@ class WordPressQuery
 		$this->queryArgs["posts_per_page"] = $v;
 	}
 
-	protected function build__page($v)
+	protected function build__slug($v)
 	{
-		$this->queryArgs["paged"] = $v;
+		$this->queryArgs["page"] = $v;
 	}
 
-	protected function build__pagename($v)
+	protected function build__path($v)
 	{
-		$this->queryArgs["pagename"] = $v;
+		$this->queryArgs["pagename"] = implode("/", $v);
 	}
 
 	protected function build__name($v)
