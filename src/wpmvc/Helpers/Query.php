@@ -6,7 +6,7 @@ namespace wpmvc\Helpers;
  * Takes (mostly) WordPress agnostic terms and
  * maps them to the WordPress WP_Query object.
  */
-class WordPressQuery
+class Query
 {
 	public $queryArgs = array(
 		"fields" => "ids",

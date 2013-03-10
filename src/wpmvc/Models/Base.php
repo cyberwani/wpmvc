@@ -25,7 +25,7 @@ class Base
 
 	protected function find()
 	{
-		$query = new \wpmvc\Helpers\WordPressQuery($this->options);
+		$query = new \wpmvc\Helpers\Query($this->options);
 		$results = $query->run();
 		return $this->prepareData($results);
 	}
