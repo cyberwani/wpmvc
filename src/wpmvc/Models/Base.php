@@ -9,7 +9,8 @@ class Base
 	protected $filterWhere;
 
 	protected $queryArgs = array(
-		"fields" => "ids"
+		"fields" => "ids",
+		"posts_per_page" => 10
 	);
 
 	public $data;
