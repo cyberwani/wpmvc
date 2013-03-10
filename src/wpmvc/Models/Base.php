@@ -20,7 +20,7 @@ class Base
 	
 	public function __construct($options)
 	{
-		
+		$this->options = $options;
 	}
 
 	protected function find()

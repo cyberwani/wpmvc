@@ -7,6 +7,10 @@ class Post extends Base
 	public function __construct($options)
 	{
 		parent::__construct($options);
-		$this->options = $options;
+
+		if (isset($this->options["id"])) {
+			$this->options["p"] = $this->options["id"];
+			unset($this->options["id"]);
+		}
 	}
 }
