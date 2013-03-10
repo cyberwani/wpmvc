@@ -4,13 +4,19 @@ namespace wpmvc\Models;
 
 class Post extends Base
 {
-	public function __construct($options)
+	/**
+	 * Run any necessary alterations/additions
+	 * to the options and then set off to the model.
+	 * @param  array $options Key/value query options
+	 * @return null
+	 */
+	protected function prepareOptions($options)
 	{
-		parent::__construct($options);
-
-		if (isset($this->options["id"])) {
-			$this->options["p"] = $this->options["id"];
-			unset($this->options["id"]);
+		if (isset($options["id"])) {
+			$options["p"] = $options["id"];
+			unset($options["id"]);
 		}
+
+		parent::prepareOptions($options);
 	}
 }

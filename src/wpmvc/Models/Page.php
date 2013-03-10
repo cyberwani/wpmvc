@@ -4,14 +4,20 @@ namespace wpmvc\Models;
 
 class Page extends Base
 {
-	public function __construct($options)
+	/**
+	 * Run any necessary alterations/additions
+	 * to the options and then set off to the model.
+	 * @param  array $options Key/value query options
+	 * @return null
+	 */
+	protected function prepareOptions($options)
 	{
-		parent::__construct($options);
-		$this->options["type"] = "page";
-
-		if (isset($this->options["id"])) {
-			$this->options["page_id"] = $this->options["id"];
-			unset($this->options["id"]);
+		$options["type"] = "page";
+		if (isset($options["id"])) {
+			$options["page_id"] = $options["id"];
+			unset($options["id"]);
 		}
+
+		parent::prepareOptions($options);
 	}
 }

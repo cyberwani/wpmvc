@@ -26,7 +26,7 @@ abstract class Base
 	/**
 	 * Sets template and instantiates the model.
 	 * @param string $template Absolute location of template.
-	 * @param array  $options  Key/value options
+	 * @param array  $options  Key/value query options
 	 * @return null
 	 *
 	 * Available options:
