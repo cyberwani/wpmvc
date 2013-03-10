@@ -6,12 +6,12 @@ class Base
 {
 	protected $options;
 
-	protected $filterWhere;
-
-	protected $queryArgs = array(
-		"fields" => "ids",
-		"posts_per_page" => 10
-	);
+	/**
+	 * Arguments send to Query helper. Arguments
+	 * are in wpmvc format; not wordpress.
+	 * @var associative array
+	 */
+	protected $queryArgs;
 
 	public $data;
 	
@@ -24,8 +24,6 @@ class Base
 				$this->$k = $v;
 			}
 		}
-
-		$this->buildQueryArgs();
 	}
 
 	public function findOne()
@@ -42,21 +40,8 @@ class Base
 
 	protected function find()
 	{
-		if (is_callable($this->filterWhere)) {
-			add_filter("posts_where", $this->filterWhere);
-		}
-
-		$query = new \WP_Query($this->queryArgs);
-
-		if (is_callable($this->filterWhere)) {
-			remove_filter("posts_where", $this->filterWhere);
-		}
-		
-		$ids = $query->posts;
-		foreach ($ids as $id) {
-			$results[] = get_post($id);
-		}
-
+		$query = new \wpmvc\Helpers\WordPressQuery($this->queryArgs);
+		$results = $query->run();
 		return $this->prepareData($results);
 	}
 

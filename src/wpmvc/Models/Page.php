@@ -9,11 +9,10 @@ class Page extends Base
 	public function __construct($options)
 	{
 		parent::__construct($options);
-	}
 
-	protected function buildQueryArgs()
-	{
-		$this->queryArgs["post_type"] = "page";
-		$this->queryArgs["pagename"] = implode("/", $this->slug);
+		$this->queryArgs = array(
+			"type" => "page",
+			"pagename" => implode("/", $this->slug)
+		);
 	}
 }

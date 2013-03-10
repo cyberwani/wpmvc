@@ -12,14 +12,10 @@ class Post extends Base
 	public function __construct($options)
 	{
 		parent::__construct($options);
-	}
 
-	protected function buildQueryArgs()
-	{
-		$this->queryArgs["post_type"] = "post";
-		$this->queryArgs["year"] = $this->year;
-		$this->queryArgs["monthnum"] = $this->month;
-		$this->queryArgs["day"] = $this->day;
-		$this->queryAtgs["name"] = $this->slug;
+		$this->queryArgs = array(
+			"name" => $this->slug,
+			"time" => "{$this->year}-{$this->month}-{$this->day}"
+		);
 	}
 }
