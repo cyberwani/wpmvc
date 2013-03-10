@@ -26,8 +26,7 @@ class Base
 	protected function find()
 	{
 		$query = new \wpmvc\Helpers\Query($this->options);
-		$results = $query->run();
-		return $this->prepareData($results);
+		return $query->run();
 	}
 
 	public function findOne()
@@ -40,13 +39,5 @@ class Base
 	{
 		$resultset = $this->find();
 		$this->data = $resultset;
-	}
-
-	protected function prepareData($results)
-	{
-		foreach ($results as $item) {
-			$item->url = get_permalink($item->ID);
-		}
-		return $results;
 	}
 }

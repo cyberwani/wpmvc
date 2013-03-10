@@ -45,7 +45,15 @@ class Query
 			$this->results[] = get_post($id);
 		}
 
-		return $this->results;
+		return $this->prepareData($this->results);
+	}
+
+	protected function prepareData($results)
+	{
+		foreach ($results as $item) {
+			$item->url = get_permalink($item->ID);
+		}
+		return $results;
 	}
 
 	protected function join($v, $char = ",")
