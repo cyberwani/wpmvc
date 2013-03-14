@@ -75,9 +75,25 @@ class Query
 	protected function prepareData($results)
 	{
 		foreach ($results as $item) {
+			$item->post_date = strtotime($item->post_date);
+			$item->post_excerpt = $this->createExcerpt($item);
+
 			$item->url = get_permalink($item->ID);
 		}
 		return $results;
+	}
+
+	protected function createExcerpt($item)
+	{
+		if (!empty($item->post_excerpt)) {
+			return $item->post_excerpt;
+		}
+
+		$words = explode(" ", strip_tags($item->post_content), 75);
+		array_pop($words);
+		$excerpt = implode(" ", $words);
+
+		return rtrim($excerpt, ".");
 	}
 
 	/**
