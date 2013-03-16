@@ -135,6 +135,17 @@ class Query
 	 */
 	protected function build__category($v)
 	{
+		if (!is_array($v)) {
+			$v = array($v);
+		}
+		$v = array_map(function($value) {
+			if (!is_numeric($value)) {
+				$category = get_category_by_slug($value);
+				$value = $category->term_id;
+			}
+			return $value;
+		}, $v);
+
 		$v = $this->join($v);
 		$this->queryArgs["category__in"] = $v;
 		return $this;
@@ -257,6 +268,18 @@ class Query
 	 */
 	protected function build__tag($v)
 	{
+		if (!is_array($v)) {
+			$v = array($v);
+		}
+		$v = array_map(function($value) {
+			if (!is_numeric($value)) {
+				$tag = get_tags(array("slug" => $value));
+				$tag = array_shift($tag);
+				$value = $tag->term_id;
+			}
+			return $value;
+		}, $v);
+
 		$v = $this->join($v);
 		$this->queryArgs["tag__in"] = $v;
 		return $this;
