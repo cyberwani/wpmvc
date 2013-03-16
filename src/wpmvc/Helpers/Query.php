@@ -89,6 +89,12 @@ class Query
 		return $results;
 	}
 
+	/**
+	 * If an except doesn't exist already,
+	 * one is created. 
+	 * @param  object $item Post object
+	 * @return string The excerpt
+	 */
 	protected function createExcerpt($item)
 	{
 		if (!empty($item->post_excerpt)) {
