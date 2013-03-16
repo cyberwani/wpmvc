@@ -13,6 +13,12 @@ class Base
 	protected $options;
 
 	/**
+	 * WP_Query object
+	 * @var object
+	 */
+	protected $query;
+
+	/**
 	 * Data retrieved from the model.
 	 * @var mixed Array or object
 	 */
@@ -45,8 +51,8 @@ class Base
 	 */
 	protected function find()
 	{
-		$query = new \wpmvc\Helpers\Query($this->options);
-		return $query->run();
+		$this->query = new \wpmvc\Helpers\Query($this->options);
+		return $this->query->run();
 	}
 
 	/**
