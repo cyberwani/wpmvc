@@ -8,7 +8,7 @@ class Query
 	 * WP_Query object-ready arguments
 	 * @var array
 	 */
-	public $queryArgs = array(
+	protected $queryArgs = array(
 		"fields" => "ids",
 		"posts_per_page" => 10
 	);
