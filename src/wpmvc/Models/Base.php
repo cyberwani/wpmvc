@@ -62,7 +62,13 @@ class Base
 	public function findOne()
 	{
 		$resultset = $this->find();
-		$this->data = array_shift($resultset);
+		$this->data["results"] = array_shift($resultset);
+
+		$pager = new \wpmvc\Helpers\Pager(array(
+			"id" => $this->data["results"]->ID
+		));
+		$this->data["pagination"] = $pager->paginate();
+		
 		return $this;
 	}
 
@@ -72,8 +78,14 @@ class Base
 	 */
 	public function findMany()
 	{
-		$resultset = $this->find();
-		$this->data = $resultset;
+		$this->data["results"] = $this->find();
+
+		$pager = new \wpmvc\Helpers\Pager(array(
+			"totalPages" => $this->query->getTotalPages(),
+			"currentPage" => $this->query->getCurrentPage()
+		));
+		$this->data["pagination"] = $pager->paginate();
+
 		return $this;
 	}
 }
