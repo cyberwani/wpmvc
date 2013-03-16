@@ -49,6 +49,26 @@ class Query
 	}
 
 	/**
+	 * Gets the total number of pages available in
+	 * the current query
+	 * @return int
+	 */
+	public function getTotalPages()
+	{
+		return $this->wpquery->max_num_pages;
+	}
+
+	/**
+	 * Gets the current page of the current
+	 * query results
+	 * @return int
+	 */
+	public function getCurrentPage()
+	{
+		return $this->wpquery->query_vars["paged"];
+	}
+
+	/**
 	 * Runs the query and returns the data to the model.
 	 * @return array Resultset
 	 */
