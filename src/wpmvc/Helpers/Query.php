@@ -22,6 +22,12 @@ class Query
 	protected $filterWhere;
 
 	/**
+	 * WP_Query object
+	 * @var object
+	 */
+	protected $wpquery;
+
+	/**
 	 * Resultset
 	 * @var array
 	 */
@@ -52,13 +58,13 @@ class Query
 			add_filter("posts_where", $this->filterWhere);
 		}
 
-		$query = new \WP_Query($this->queryArgs);
+		$this->wpquery = new \WP_Query($this->queryArgs);
 
 		if (is_callable($this->filterWhere)) {
 			remove_filter("posts_where", $this->filterWhere);
 		}
 
-		$ids = $query->posts;
+		$ids = $this->wpquery->posts;
 
 		foreach ($ids as $id) {
 			$this->results[] = get_post($id);
