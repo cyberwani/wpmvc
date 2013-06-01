@@ -115,6 +115,10 @@ class Query
 
 			$item->url = get_permalink($item->ID);
 			$item->taxnomy = $this->getTerms($item);
+			$item->attachments = $this->getAttachments($item);
+			$item->featuredImage = $this->getFeaturedImage($item);
+
+			unset($item->guid);
 		}
 		return $results;
 	}
@@ -154,6 +158,22 @@ class Query
 		}
 
 		return $terms;
+	}
+
+	protected function getAttachments($item)
+	{
+		return get_children(array(
+			"post_parent" => $item->ID,
+			"post_type"   => "attachment", 
+		    "numberposts" => -1,
+		    "post_status" => "any"	
+		));
+	}
+
+	protected function getFeaturedImage($item)
+	{
+		$id = get_post_thumbnail_id($item->ID);
+		return get_post($id);
 	}
 
 	/**
