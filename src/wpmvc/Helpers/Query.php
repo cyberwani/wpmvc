@@ -44,8 +44,17 @@ class Query
 			$method = "build__{$k}";
 			if (method_exists($this, $method)) {
 				$this->$method($v);
+			} else if (in_array($k, $this->getCustomTaxonomies())) {
+				$this->build__taxonomy($k, $v);
 			}
 		}
+	}
+
+	protected function getCustomTaxonomies()
+	{
+		$all = get_taxonomies();
+		$default = array("category", "post_tag", "nav_menu", "link_category", "post_format");
+		return array_diff($all, $default);
 	}
 
 	/**
@@ -309,6 +318,37 @@ class Query
 		$v = $this->join($v);
 		$this->queryArgs["tag__in"] = $v;
 		return $this;
+	}
+
+	/**
+	 * Converts the custom taxonomy option into WP_Query
+	 * friendly arguments
+	 * @param  string $tax Custom taxonomy name
+	 * @param  mixed $v    String, integer or array of sting and integers.
+	 * @return $this
+	 */
+	protected function build__taxonomy($tax, $v)
+	{
+		if (!is_array($v)) {
+			$v = array($v);
+		}
+		$v = array_map(function($value) use ($tax) {
+			if (!is_numeric($value)) {
+				$term = get_term_by("slug", $value, $tax);
+				$value = $term->term_id;
+			}
+			return $value;
+		}, $v);
+
+		$v = $this->join($v);
+
+		$this->queryArgs["tax_query"] = array(
+			array(
+				"taxonomy" => $tax,
+				"field" => "id",
+				"terms" => $v
+			)
+		);
 	}
 
 	/**

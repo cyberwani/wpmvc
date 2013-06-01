@@ -89,6 +89,12 @@ abstract class Base
 	 * 					  	to "post."
 	 *
 	 * year {int}			Retrieves content published during a specific year (YYYY)
+	 *
+	 * {taxonomy} {string}	Retrieves content attached to a term or terms in a custom
+	 * 						taxonomy. Pass the slug of the taxonomy as the option key
+	 * 						and the ID or slug of a term to retrieve content in one
+	 * 						term. Pass an array of IDs or slugs to retrieve content
+	 * 						in multuple terms. "OR" logic is used.
 	 * 
 	 */
 	public function __construct($template, $options = array())
