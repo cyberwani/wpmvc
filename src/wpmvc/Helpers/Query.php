@@ -114,6 +114,7 @@ class Query
 			$item->post_excerpt = $this->createExcerpt($item);
 
 			$item->url = get_permalink($item->ID);
+			$item->taxnomy = $this->getTerms($item);
 		}
 		return $results;
 	}
@@ -135,6 +136,24 @@ class Query
 		$excerpt = implode(" ", $words);
 
 		return rtrim($excerpt, ".");
+	}
+
+	/**
+	 * Gets terms on the given item for all
+	 * taxonomies attached to the item's posty type.
+	 * @param  object $item Post object
+	 * @return array
+	 */
+	protected function getTerms($item)
+	{
+		$taxonomies = get_object_taxonomies($item);
+		$terms = array();
+
+		foreach ($taxonomies as $taxonomy) {
+			$terms[$taxonomy] = wp_get_post_terms($item->ID, $taxonomy);
+		}
+
+		return $terms;
 	}
 
 	/**
