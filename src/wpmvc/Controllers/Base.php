@@ -2,6 +2,8 @@
 
 namespace wpmvc\Controllers;
 
+use \wpmvc\Application;
+
 abstract class Base
 {
 	/**
@@ -111,7 +113,7 @@ abstract class Base
 	 */
 	protected function render()
 	{
-		$data = $this->model->data;
-		include $this->template;
+		$engine = Application::$templateEngine;
+		$engine->render($this->template, $this->model->data);
 	}
 }
