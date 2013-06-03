@@ -7,7 +7,7 @@ use \wpmvc\Application;
 abstract class Base
 {
 	/**
-	 * Absolute location of template.
+	 * Template
 	 * @var string
 	 */
 	protected $template;
@@ -27,8 +27,8 @@ abstract class Base
 
 	/**
 	 * Sets template and instantiates the model.
-	 * @param string $template Absolute location of template.
 	 * @param array  $options  Key/value query options
+	 * @param string $template Absolute location of template.
 	 * @return null
 	 *
 	 * Available options:
@@ -99,9 +99,14 @@ abstract class Base
 	 * 						in multuple terms. "OR" logic is used.
 	 * 
 	 */
-	public function __construct($template, $options = array())
+	public function __construct($options = array(), $template = "")
 	{
-		$this->template = $template;
+		if ($template) {
+			$this->template = $template;
+		} else {
+			// use default
+		}
+
 		$model = "\\wpmvc\\Models\\{$this->modelName}";
 		$this->model = new $model($options);
 	}

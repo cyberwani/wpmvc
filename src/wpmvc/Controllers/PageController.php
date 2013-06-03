@@ -7,6 +7,12 @@ class PageController extends Base
 	protected $modelName = "Page";
 
 	/**
+	 * Default template name
+	 * @var string
+	 */
+	protected $template = "page";
+
+	/**
 	 * Runs the parent constructor, gets the data
 	 * from the model and renders the view.
 	 * @param string $template Absolute location of template.
