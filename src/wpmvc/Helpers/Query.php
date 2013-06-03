@@ -114,7 +114,7 @@ class Query
 			$item->post_excerpt = $this->createExcerpt($item);
 
 			$item->url = get_permalink($item->ID);
-			$item->taxnomy = $this->getTerms($item);
+			$item->taxonomy = $this->getTerms($item);
 			$item->attachments = $this->getAttachments($item);
 			$item->featuredImage = $this->getFeaturedImage($item);
 
