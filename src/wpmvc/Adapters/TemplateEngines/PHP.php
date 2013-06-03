@@ -2,7 +2,7 @@
 
 namespace wpmvc\Adapters\TemplateEngines;
 
-class PHPTemplate implements \wpmvc\Interfaces\TemplateEngine
+class PHP implements \wpmvc\Interfaces\TemplateEngine
 {
 	protected $baseDir;
 
