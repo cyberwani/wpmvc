@@ -99,16 +99,20 @@ abstract class Base
 	 * 						in multuple terms. "OR" logic is used.
 	 * 
 	 */
-	public function __construct($options = array(), $template = "")
+	public function __construct($options = array(), $template = null)
 	{
 		if ($template) {
 			$this->template = $template;
-		} else {
-			// use default
 		}
 
-		$model = "\\wpmvc\\Models\\{$this->modelName}";
-		$this->model = new $model($options);
+		$model = Application::$appNamespace . "\\Models\\{$this->modelName}";
+		
+		if (class_exists($model)) {
+			$this->model = new $model($options);
+		} else {
+			$model = "\\wpmvc\\Models\\{$this->modelName}";
+			$this->model = new $model($options);
+		}
 	}
 
 	/**
