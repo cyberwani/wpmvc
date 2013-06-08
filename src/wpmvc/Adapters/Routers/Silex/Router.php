@@ -2,6 +2,8 @@
 
 namespace wpmvc\Adapters\Routers\Silex;
 
+use \wpmvc\Adapters\Routers\Silex\Route;
+
 class Router implements \wpmvc\Interfaces\Router
 {
 	/**

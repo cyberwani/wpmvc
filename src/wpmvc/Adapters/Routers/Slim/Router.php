@@ -2,6 +2,8 @@
 
 namespace wpmvc\Adapters\Routers\Slim;
 
+use \wpmvc\Adapters\Routers\Slim\Route;
+
 class Router implements \wpmvc\Interfaces\Router
 {
 	/**
