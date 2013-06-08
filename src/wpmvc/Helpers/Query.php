@@ -281,6 +281,28 @@ class Query
 	}
 
 	/**
+	 * Converts the p option into WP_Query friendly arguments.
+	 * @param  int $v
+	 * @return $this
+	 */
+	protected function build__p($v)
+	{
+		$this->queryArgs["p"] = $v;
+		return $this;
+	}
+
+	/**
+	 * Converts the page_id option into WP_Query friendly arguments.
+	 * @param  int $v
+	 * @return $this
+	 */
+	protected function build__page_id($v)
+	{
+		$this->queryArgs["page_id"] = $v;
+		return $this;
+	}
+
+	/**
 	 * Converts the page option into WP_Query friendly arguments.
 	 * @param  int $v
 	 * @return $this
