@@ -2,7 +2,7 @@
 
 namespace wpmvc\Models;
 
-class Base
+abstract class Base
 {
 	/**
 	 * Modified version of options passed into
@@ -41,7 +41,7 @@ class Base
 	 */
 	protected function prepareOptions($options)
 	{
-		$this->options = $options;
+		$this->options = $this->data["query"] = $options;
 	}
 
 	/**
