@@ -15,13 +15,13 @@ class AttachmentController extends Base
 	/**
 	 * Runs the parent constructor, gets the data
 	 * from the model and renders the view.
-	 * @param string $template Absolute location of template.
 	 * @param array  $options  Key/value query options
+	 * @param string $template Absolute location of template.
 	 * @return null
 	 */
-	public function __construct($template, $options = array())
+	public function __construct($options = array(), $template = null)
 	{
-		parent::__construct($template, $options);
+		parent::__construct($options, $template);
 
 		$this->model->findOne();
 		$this->render();
