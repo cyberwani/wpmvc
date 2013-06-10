@@ -1,6 +1,7 @@
 <?php
 
 namespace wpmvc\Models;
+use \wpmvc\Application;
 
 abstract class Base
 {
@@ -52,7 +53,13 @@ abstract class Base
 	protected function find()
 	{
 		$this->query = new \wpmvc\Helpers\Query($this->options);
-		return $this->query->run();
+		$results = $this->query->run();
+
+		if (empty($results)) {
+			Application::$router->notFound();
+		}
+
+		return $results;
 	}
 
 	/**
@@ -61,8 +68,7 @@ abstract class Base
 	 */
 	public function findOne()
 	{
-		$resultset = $this->find();
-		$this->data["results"] = array_shift($resultset);
+		$this->data["results"] = array_shift($this->find());
 
 		$pager = new \wpmvc\Helpers\Pager(array(
 			"id" => $this->data["results"]->ID
