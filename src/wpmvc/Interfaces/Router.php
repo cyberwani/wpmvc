@@ -21,6 +21,9 @@ interface Router
 	// Error reporting
 	public function error($callable);
 
+	// Not found
+	public function notFound($callable);
+
 	// Run the router
 	public function run();
 }
