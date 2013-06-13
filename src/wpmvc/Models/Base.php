@@ -6,7 +6,9 @@ abstract class Base
 {
 	protected $fieldMap = array(
 		"ID" => "id",
-		"post_modified" => "last_modified"
+		"post_date" => "publish_date",
+		"post_modified" => "last_modified",
+		"post_name" => "slug"
 	);
 
 	public function __construct($recordset)
