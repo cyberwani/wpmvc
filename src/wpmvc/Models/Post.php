@@ -4,19 +4,27 @@ namespace wpmvc\Models;
 
 class Post extends Base
 {
-	/**
-	 * Run any necessary alterations/additions
-	 * to the options and then set off to the model.
-	 * @param  array $options Key/value query options
-	 * @return null
-	 */
-	protected function prepareOptions($options)
-	{
-		if (isset($options["id"])) {
-			$options["p"] = $options["id"];
-			unset($options["id"]);
-		}
+	public $id;
+	public $type;
+	public $url;
+	public $author;
+	public $publish_date;
+	public $last_modified;
+	public $content;
+	public $title;
+	public $excerpt;
+	public $status;
+	public $slug;
+	public $parent;
+	public $comment_status;
+	public $comment_count;
+	public $taxonomy = array();
+	public $attachments = array();
+	public $featured_image = array();
+	public $pagination = array();
 
-		parent::prepareOptions($options);
+	public function __construct($recordset)
+	{
+		parent::__construct($recordset);
 	}
 }

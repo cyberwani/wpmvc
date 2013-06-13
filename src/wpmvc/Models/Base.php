@@ -1,97 +1,32 @@
 <?php
 
 namespace wpmvc\Models;
-use \wpmvc\Application;
 
 abstract class Base
 {
-	/**
-	 * Modified version of options passed into
-	 * the model. Ready to be used in database
-	 * query adapter.
-	 * @var Associative array
-	 */
-	protected $options;
+	protected $fieldMap = array(
+		"ID" => "id",
+		"post_modified" => "last_modified"
+	);
 
-	/**
-	 * WP_Query object
-	 * @var object
-	 */
-	protected $query;
-
-	/**
-	 * Data retrieved from the model.
-	 * @var mixed Array or object
-	 */
-	public $data;
-	
-	/**
-	 * Saves passed options to the model.
-	 * @param array $options Key/value query options
-	 */
-	public function __construct($options)
+	public function __construct($recordset)
 	{
-		$this->prepareOptions($options);		
-	}
+		foreach($recordset as $key => $value) {
 
-	/**
-	 * Run any necessary alterations/additions
-	 * to the options and then set off to the model.
-	 * @param  array $options Key/value query options
-	 * @return null
-	 */
-	protected function prepareOptions($options)
-	{
-		$this->options = $this->data["query"] = $options;
-	}
+			$postless = str_replace("post_", "", $key);
+			$mapped = array_keys($this->fieldMap);
 
-	/**
-	 * Instantiates the Query helper, runs the query,
-	 * and then prepares the result.
-	 * @return array Resultset
-	 */
-	protected function find()
-	{
-		$this->query = new \wpmvc\Helpers\Query($this->options);
-		$results = $this->query->run();
+			if (property_exists($this, $key)) {
+				$this->$key = $value;
 
-		if (empty($results)) {
-			Application::$router->notFound();
+			} else if (property_exists($this, $postless)) {
+				$this->$postless = $value;
+
+			} else if (in_array($key, $mapped)) {
+				$newName= $this->fieldMap[$key];
+				$this->$newName = $value;
+			}
+
 		}
-
-		return $results;
-	}
-
-	/**
-	 * Used by models looking for one result.
-	 * @return $this
-	 */
-	public function findOne()
-	{
-		$this->data["results"] = array_shift($this->find());
-
-		$pager = new \wpmvc\Helpers\Pager(array(
-			"id" => $this->data["results"]->ID
-		));
-		$this->data["pagination"] = $pager->paginate();
-		
-		return $this;
-	}
-
-	/**
-	 * Used by models looking for many results.
-	 * @return $this
-	 */
-	public function findMany()
-	{
-		$this->data["results"] = $this->find();
-
-		$pager = new \wpmvc\Helpers\Pager(array(
-			"totalPages" => $this->query->getTotalPages(),
-			"currentPage" => $this->query->getCurrentPage()
-		));
-		$this->data["pagination"] = $pager->paginate();
-
-		return $this;
 	}
 }
