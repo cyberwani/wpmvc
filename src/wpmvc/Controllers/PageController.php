@@ -4,7 +4,7 @@ namespace wpmvc\Controllers;
 
 class PageController extends Base
 {
-	protected $modelName = "Page";
+	protected $mapperName = "Page";
 
 	/**
 	 * Default template name
@@ -14,7 +14,7 @@ class PageController extends Base
 
 	/**
 	 * Runs the parent constructor, gets the data
-	 * from the model and renders the view.
+	 * from the mapper and renders the view.
 	 * @param array  $options  Key/value query options
 	 * @param string $template Absolute location of template.
 	 * @return null
@@ -23,7 +23,7 @@ class PageController extends Base
 	{
 		parent::__construct($options, $template);
 
-		$this->model->findOne();
+		$this->mapper->findOne();
 		$this->render();
 	}
 }

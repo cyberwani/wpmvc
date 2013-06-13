@@ -13,20 +13,20 @@ abstract class Base
 	protected $template;
 
 	/**
-	 * Name of model to instantiate; defined
+	 * Name of mapper to instantiate; defined
 	 * in child classes. 
 	 * @var string
 	 */
-	protected $modelName;
+	protected $mapperName;
 
 	/**
-	 * Model instantiated by controller.
+	 * mapper instantiated by controller.
 	 * @var object
 	 */
-	protected $model;
+	protected $mapper;
 
 	/**
-	 * Sets template and instantiates the model.
+	 * Sets template and instantiates the mapper.
 	 * @param array  $options  Key/value query options
 	 * @param string $template Absolute location of template.
 	 * @return null
@@ -105,24 +105,25 @@ abstract class Base
 			$this->template = $template;
 		}
 
-		$model = Application::$appNamespace . "\\Models\\{$this->modelName}";
+		$mapper = Application::$appNamespace . "\\Mappers\\{$this->mapperName}Mapper";
 		
-		if (class_exists($model)) {
-			$this->model = new $model($options);
+		if (class_exists($mapper)) {
+			$this->mapper = new $mapper($options);
 		} else {
-			$model = "\\wpmvc\\Models\\{$this->modelName}";
-			$this->model = new $model($options);
+			$mapper = "\\wpmvc\\Mappers\\{$this->mapperName}Mapper";
+			$this->mapper = new $mapper($options);
 		}
 	}
 
 	/**
 	 * Renders the content using the designated template
-	 * and data obtained by the model.
+	 * and data obtained by the mapper.
+	 * @var array $data Data
 	 * @return null
 	 */
-	protected function render()
+	protected function render($data)
 	{
 		$engine = Application::$templateEngine;
-		$engine->render($this->template, $this->model->data);
+		$engine->render($this->template, $data);
 	}
 }
