@@ -22,8 +22,7 @@ class PageController extends Base
 	public function __construct($options = array(), $template = null)
 	{
 		parent::__construct($options, $template);
-
-		$this->mapper->findOne();
-		$this->render();
+		$page = $this->mapper->findOne();
+		$this->render(array("page" => $page));
 	}
 }
