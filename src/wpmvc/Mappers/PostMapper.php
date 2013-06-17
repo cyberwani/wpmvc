@@ -22,4 +22,13 @@ class PostMapper extends Base
 	
 		parent::prepareOptions($options);
 	}
+
+	protected function addDataToResult($item)
+	{
+		$item = parent::addDataToResult($item);
+
+		$item->url = get_permalink($item->ID);
+
+		return $item;
+	}
 }

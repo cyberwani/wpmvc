@@ -141,7 +141,6 @@ abstract class Base
 		$item->taxonomy = $this->getTerms($item);
 		$item->attachments = $this->getAttachments($item);
 		$item->featuredImage = $this->getFeaturedImage($item);
-		$item->url = get_permalink($item->ID);
 		
 		return $item;
 	}
