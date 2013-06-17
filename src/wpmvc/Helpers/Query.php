@@ -40,6 +40,11 @@ class Query
 	 */
 	public function __construct($options = array())
 	{
+		// set default type to all custom post types and built in post types
+		if (!isset($options["type"])) {
+			$options["type"] = get_post_types(array("_builtin" => false)) + array("post");
+		}
+
 		foreach ($options as $k => $v) {
 			$method = "build__{$k}";
 			if (method_exists($this, $method)) {
