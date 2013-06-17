@@ -22,8 +22,7 @@ class CollectionController extends Base
 	public function __construct($options = array(), $template = null)
 	{
 		parent::__construct($options, $template);
-
-		$this->mapper->findMany();
-		$this->render();
+		$collection = $this->mapper->findMany();
+		$this->render(array("collection" => $collection));
 	}
 }

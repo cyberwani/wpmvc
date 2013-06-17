@@ -37,10 +37,18 @@ abstract class Base
 
 	protected function hydrate($recordset)
 	{
-		// print_r($recordset); die();
-		
 		if (is_array($recordset)) {
-			// hydrate collection or objects
+
+			return array_map(function($item) {
+				$object = ucfirst($item->post_type);
+				$objectModel = Application::$appNamespace . "\\Models\\{$object}";
+
+				if (!class_exists($objectModel)) {
+					$objectModel = "\\wpmvc\\Models\\{$object}";
+				}
+				return new $objectModel($item);
+			}, $recordset);
+
 		} else {
 			$objectModel = Application::$appNamespace . "\\Models\\{$this->object}";
 			if (!class_exists($objectModel)) {
@@ -88,16 +96,6 @@ abstract class Base
 	{
 		$recordset = array_shift($this->find());
 		return $this->hydrate($recordset);
-
-		// hydrate
-		// get hydrated object
-
-		// $pager = new \wpmvc\Helpers\Pager(array(
-		// 	"id" => $this->data["results"]->ID
-		// ));
-		// $this->data["pagination"] = $pager->paginate();
-		
-		// return $this;
 	}
 
 	/**
@@ -108,17 +106,6 @@ abstract class Base
 	{
 		$recordset = $this->find();
 		return $this->hydrate($recordset);
-
-		// hydrate
-		// get hydrated object
-
-		// $pager = new \wpmvc\Helpers\Pager(array(
-		// 	"totalPages" => $this->query->getTotalPages(),
-		// 	"currentPage" => $this->query->getCurrentPage()
-		// ));
-		// $this->data["pagination"] = $pager->paginate();
-
-		// return $this;
 	}
 
 	protected function mapExtraData($results)
