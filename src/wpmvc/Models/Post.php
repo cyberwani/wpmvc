@@ -4,6 +4,13 @@ namespace wpmvc\Models;
 
 class Post extends Base
 {
+	protected $fieldMap = array(
+		"ID" => "id",
+		"post_date" => "publish_date",
+		"post_modified" => "last_modified",
+		"post_name" => "slug"
+	);
+	
 	public $id;
 	public $type;
 	public $url;
