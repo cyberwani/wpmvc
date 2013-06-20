@@ -4,7 +4,7 @@ namespace wpmvc\Controllers;
 
 class AttachmentController extends Base
 {
-	protected $mapperName = "Attachment";
+	protected $mapperName = "AttachmentMapper";
 
 	/**
 	 * Default template name

@@ -6,6 +6,7 @@ class Attachment extends Base
 {
 	protected $fieldMap = array(
 		"ID" => "id",
+		"post_mime_type" => "type",
 		"post_date" => "publish_date",
 		"post_modified" => "last_modified",
 		"post_name" => "slug",
@@ -25,7 +26,6 @@ class Attachment extends Base
 	public $alt_text;
 	public $status;
 	public $slug;
-	public $parent;
 	public $comment_status;
 	public $comment_count;
 
