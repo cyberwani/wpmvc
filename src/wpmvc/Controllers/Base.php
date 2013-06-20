@@ -3,6 +3,7 @@
 namespace wpmvc\Controllers;
 
 use \wpmvc\Application;
+use \wpmvc\Helpers\ClassFinder;
 
 abstract class Base
 {
@@ -105,14 +106,8 @@ abstract class Base
 			$this->template = $template;
 		}
 
-		$mapper = Application::$appNamespace . "\\Mappers\\{$this->mapperName}Mapper";
-		
-		if (class_exists($mapper)) {
-			$this->mapper = new $mapper($options);
-		} else {
-			$mapper = "\\wpmvc\\Mappers\\{$this->mapperName}Mapper";
-			$this->mapper = new $mapper($options);
-		}
+		$mapper = ClassFinder::find("Mappers", $this->mapperName);
+		$this->mapper = new $mapper($options);
 	}
 
 	/**

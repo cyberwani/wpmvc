@@ -4,7 +4,7 @@ namespace wpmvc\Controllers;
 
 class CollectionController extends Base
 {
-	protected $mapperName = "Collection";
+	protected $mapperName = "CollectionMapper";
 
 	/**
 	 * Default template name

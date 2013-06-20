@@ -3,6 +3,7 @@
 namespace wpmvc\Mappers;
 
 use \wpmvc\Application;
+use \wpmvc\Helpers\ClassFinder;
 
 abstract class Base
 {
@@ -40,21 +41,13 @@ abstract class Base
 		if (is_array($recordset)) {
 
 			return array_map(function($item) {
-				$object = ucfirst($item->post_type);
-				$objectModel = Application::$appNamespace . "\\Models\\{$object}";
-
-				if (!class_exists($objectModel)) {
-					$objectModel = "\\wpmvc\\Models\\{$object}";
-				}
-				return new $objectModel($item);
+				$model = ClassFinder::find("Models", ucfirst($item->post_type));
+				return new $model($item);
 			}, $recordset);
 
 		} else {
-			$objectModel = Application::$appNamespace . "\\Models\\{$this->object}";
-			if (!class_exists($objectModel)) {
-				$objectModel = "\\wpmvc\\Models\\{$this->object}";
-			}
-			return new $objectModel($recordset);
+			$model = ClassFinder::find("Models", ucfirst($this->object));
+			return new $model($recordset);
 		}
 	}
 
