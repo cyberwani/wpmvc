@@ -40,15 +40,19 @@ abstract class Base
 	{
 		if (is_array($recordset)) {
 
-			return array_map(function($item) {
+			$data = array_map(function($item) {
 				$model = ClassFinder::find("Models", ucfirst($item->post_type));
 				return new $model($item);
 			}, $recordset);
 
 		} else {
 			$model = ClassFinder::find("Models", ucfirst($this->object));
-			return new $model($recordset);
+			$data = new $model($recordset);
 		}
+
+		return array(
+			"result" => $data
+		);
 	}
 
 	/**
@@ -76,7 +80,7 @@ abstract class Base
 			Application::$router->notFound();
 		}
 
-		$this->mapExtraData($results);
+		$this->mapExtraDataToEachResult($results);
 
 		return $results;
 	}
@@ -101,7 +105,7 @@ abstract class Base
 		return $this->hydrate($recordset);
 	}
 
-	protected function mapExtraData($results)
+	protected function mapExtraDataToEachResult($results)
 	{
 		return array_map(function($item) {
 			return $this->addDataToResult($item);
