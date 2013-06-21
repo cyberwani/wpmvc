@@ -22,7 +22,8 @@ class AttachmentController extends Base
 	public function __construct($options = array(), $template = null)
 	{
 		parent::__construct($options, $template);
-		$attachment = $this->mapper->findOne();
-		$this->render(array("attachment" => $attachment));
+		$data = $this->mapper->findOne();
+		$data = $this->addDataToPayload($data);
+		$this->render($data);
 	}
 }

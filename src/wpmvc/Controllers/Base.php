@@ -111,6 +111,18 @@ abstract class Base
 	}
 
 	/**
+	 * Adds the ability to add payload-wide data.
+	 * @param array $payload Payload array
+	 */
+	protected function addDataToPayload($payload)
+	{
+		// add stuff
+		// $payload["stuff"] => "stuff";
+
+		return $payload;
+	}
+
+	/**
 	 * Renders the content using the designated template
 	 * and data obtained by the mapper.
 	 * @var array $data Data

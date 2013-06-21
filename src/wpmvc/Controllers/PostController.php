@@ -22,7 +22,8 @@ class PostController extends Base
 	public function __construct($options = array(), $template = null)
 	{
 		parent::__construct($options, $template);
-		$post = $this->mapper->findOne();
-		$this->render(array("post" => $post));
+		$data = $this->mapper->findOne();
+		$data = $this->addDataToPayload($data);
+		$this->render($data);
 	}
 }
