@@ -2,7 +2,6 @@
 
 namespace wpmvc\Mappers;
 
-use \wpmvc\Application;
 use \wpmvc\Helpers\ClassFinder;
 
 abstract class Base
@@ -38,6 +37,10 @@ abstract class Base
 
 	protected function hydrate($recordset)
 	{
+		if (empty($recordset)) {
+			return $recordset;
+		}
+
 		if (is_array($recordset)) {
 
 			$data = array_map(function($item) {
@@ -75,14 +78,7 @@ abstract class Base
 	{
 		$this->query = new \wpmvc\Helpers\Query($this->options);
 		$results = $this->query->run();
-
-		if (empty($results)) {
-			Application::$router->notFound();
-		}
-
-		$results = $this->mapExtraDataToEachResult($results);
-
-		return $results;
+		return $this->mapExtraDataToEachResult($results);
 	}
 
 	/**

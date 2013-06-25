@@ -136,6 +136,10 @@ abstract class Base
 	 */
 	protected function render($data)
 	{
+		if (empty($data)) {
+			Application::$router->notFound();
+		}
+		
 		$engine = Application::$templateEngine;
 		$engine->render($this->template, $data);
 	}
