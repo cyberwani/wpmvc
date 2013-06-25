@@ -55,7 +55,7 @@ abstract class Base
 	 * 						by the order_by parameter. Value passed is either "ASC"
 	 * 						or "DESC" and defaults to "DESC."
 	 *
-	 * order_by {string}	Field by which to order the results. Look to the WP_Queru
+	 * order_by {string}	Field by which to order the results. Look to the WP_Query
 	 * 						list of availalbe options for passable values:
 	 * 						https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters
 	 * 
@@ -65,10 +65,16 @@ abstract class Base
 	 * 						all results are returned. Default: TRUE
 	 *
 	 * path {string}		Page path. Example: "/services/development/about"
+	 *
+	 * parent {int}			Retrieve child content of the content that matches the passed ID.
 	 * 						
 	 * permission {string}  User permission
 	 * 
 	 * per_page {int}   	The number of content items to retrieve. Default: 10.
+	 *
+	 * status {string}		Retrieve content with the matching status. Look to the WP_Query
+	 * 						list of availalbe options for passable values:
+	 * 						http://codex.wordpress.org/Class_Reference/WP_Query#Status_Parameters
 	 * 							
 	 * sticky {boolean} 	Whether or not to ignore sticky posts. Ignoring sticky
 	 * 						posts will not cause the posts to be excluded from the

@@ -223,6 +223,17 @@ class Query
 	}
 
 	/**
+	 * Converts the parent option into WP_Query friendly arguments.
+	 * @param  int $v
+	 * @return $this
+	 */
+	protected function build__parent($v)
+	{
+		$this->queryArgs["post_parent"] = $v;
+		return $this;
+	}
+
+	/**
 	 * Converts the page_id option into WP_Query friendly arguments.
 	 * @param  int $v
 	 * @return $this
@@ -285,6 +296,17 @@ class Query
 	protected function build__per_page($v)
 	{
 		$this->queryArgs["posts_per_page"] = $v;
+		return $this;
+	}
+
+	/**
+	 * Converts the status option into WP_Query friendly arguments.
+	 * @param  string $v
+	 * @return $this
+	 */
+	protected function build__status($v)
+	{
+		$this->queryArgs["post_status"] = $v;
 		return $this;
 	}
 
