@@ -105,6 +105,11 @@ abstract class Base
 		return $this->hydrate($recordset);
 	}
 
+	/**
+	 * Add additional data the WP_Query did not provide.
+	 * @param  array $results Resultset
+	 * @return array Resultset
+	 */
 	protected function mapExtraDataToEachResult($results)
 	{
 		return array_map(function($item) {
@@ -112,6 +117,10 @@ abstract class Base
 		}, $results);
 	}
 
+	/**
+	 * Add data to an individual item
+	 * @param object $item Result object
+	 */
 	protected function addDataToResult($item)
 	{
 		$item->post_date = strtotime($item->post_date);
@@ -123,9 +132,7 @@ abstract class Base
 
 		$item->post_excerpt = $this->createExcerpt($item);
 		$item->taxonomy = $this->getTerms($item);
-		$item->attachments = $this->getAttachments($item);
-		$item->featuredImage = $this->getFeaturedImage($item);
-		
+
 		return $item;
 	}
 

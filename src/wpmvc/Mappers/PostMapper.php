@@ -28,6 +28,8 @@ class PostMapper extends Base
 		$item = parent::addDataToResult($item);
 
 		$item->url = get_permalink($item->ID);
+		$item->attachments = $this->getAttachments($item);
+		$item->featuredImage = $this->getFeaturedImage($item);
 
 		return $item;
 	}

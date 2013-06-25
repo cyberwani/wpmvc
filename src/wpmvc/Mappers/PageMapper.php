@@ -29,6 +29,7 @@ class PageMapper extends Base
 		$item = parent::addDataToResult($item);
 
 		$item->url = get_permalink($item->ID);
+		$item->attachments = $this->getAttachments($item);
 
 		return $item;
 	}
