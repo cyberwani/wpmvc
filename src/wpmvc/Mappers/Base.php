@@ -189,7 +189,14 @@ abstract class Base
 
 	protected function getFeaturedImage($item)
 	{
-		$id = get_post_thumbnail_id($item->ID);
-		return get_post($id);
+		$args = array(
+			"id" => get_post_thumbnail_id($item->ID),
+			"status" => "any"
+		);
+
+		$mapper = new AttachmentMapper($args);
+		$attachments = $mapper->findOne();
+		
+		return $attachments["result"];
 	}
 }
