@@ -80,7 +80,7 @@ abstract class Base
 			Application::$router->notFound();
 		}
 
-		$this->mapExtraDataToEachResult($results);
+		$results = $this->mapExtraDataToEachResult($results);
 
 		return $results;
 	}
