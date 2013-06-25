@@ -168,12 +168,16 @@ abstract class Base
 
 	protected function getAttachments($item)
 	{
-		return get_children(array(
-			"post_parent" => $item->ID,
-			"post_type"   => "attachment", 
-		    "numberposts" => -1,
-		    "post_status" => "any"	
-		));
+		$args = array(
+			"parent" => $item->ID,
+			"per_page" => -1,
+			"status" => "any"
+		);
+
+		$mapper = new AttachmentMapper($args);
+		$attachments = $mapper->findMany();
+		
+		return $attachments["result"];
 	}
 
 	protected function getFeaturedImage($item)
