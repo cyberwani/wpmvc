@@ -23,7 +23,6 @@ class CollectionController extends Base
 	{
 		parent::__construct($options, $template);
 		$data = $this->mapper->findMany();
-		$data = $this->mapper->addDataToPayload($data);
 		$this->render($data);
 	}
 }

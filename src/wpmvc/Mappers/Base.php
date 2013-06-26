@@ -24,7 +24,7 @@ abstract class Base
 	 * Data retrieved from the model.
 	 * @var mixed Array or object
 	 */
-	// public $data;
+	public $data;
 	
 	/**
 	 * Saves passed options to the model.
@@ -83,34 +83,36 @@ abstract class Base
 
 	/**
 	 * Used by models looking for one result.
-	 * @return $this
+	 * @return $data
 	 */
 	public function findOne()
 	{
 		$recordset = array_shift($this->find());
-		return $this->hydrate($recordset);
+		$this->data = $this->hydrate($recordset);
+		$this->addDataToPayload();
+		return $this->data;
 	}
 
 	/**
 	 * Used by models looking for many results.
-	 * @return $this
+	 * @return $data
 	 */
 	public function findMany()
 	{
 		$recordset = $this->find();
-		return $this->hydrate($recordset);
+		$this->data = $this->hydrate($recordset);
+		$this->addDataToPayload();
+		return $this->data;
 	}
 
 	/**
 	 * Adds the ability to add payload-wide data.
-	 * @param array $payload Payload array
+	 * @return $this
 	 */
-	public function addDataToPayload($payload)
+	public function addDataToPayload()
 	{
 		// add stuff
-		// $payload["stuff"] = "stuff";
-
-		return $payload;
+		// $this->data["stuff"] = "stuff";
 	}
 
 	/**
@@ -191,9 +193,9 @@ abstract class Base
 		);
 
 		$mapper = new AttachmentMapper($args);
-		$attachments = $mapper->findMany();
+		$mapper->findMany();
 		
-		return $attachments["result"];
+		return $mapper->data["result"];
 	}
 
 	protected function getFeaturedImage($item)
@@ -204,8 +206,8 @@ abstract class Base
 		);
 
 		$mapper = new AttachmentMapper($args);
-		$attachments = $mapper->findOne();
+		$mapper->findOne();
 		
-		return $attachments["result"];
+		return $mapper->data["result"];
 	}
 }
