@@ -117,18 +117,6 @@ abstract class Base
 	}
 
 	/**
-	 * Adds the ability to add payload-wide data.
-	 * @param array $payload Payload array
-	 */
-	protected function addDataToPayload($payload)
-	{
-		// add stuff
-		// $payload["stuff"] = "stuff";
-
-		return $payload;
-	}
-
-	/**
 	 * Renders the content using the designated template
 	 * and data obtained by the mapper.
 	 * @var array $data Data
@@ -139,6 +127,8 @@ abstract class Base
 		if (empty($data)) {
 			Application::$router->notFound();
 		}
+
+		// print_r($data); die();
 		
 		$engine = Application::$templateEngine;
 		$engine->render($this->template, $data);

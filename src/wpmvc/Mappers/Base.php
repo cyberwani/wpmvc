@@ -102,6 +102,18 @@ abstract class Base
 	}
 
 	/**
+	 * Adds the ability to add payload-wide data.
+	 * @param array $payload Payload array
+	 */
+	public function addDataToPayload($payload)
+	{
+		// add stuff
+		// $payload["stuff"] = "stuff";
+
+		return $payload;
+	}
+
+	/**
 	 * Add additional data the WP_Query did not provide.
 	 * @param  array $results Resultset
 	 * @return array Resultset

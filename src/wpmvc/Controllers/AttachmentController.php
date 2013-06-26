@@ -23,7 +23,7 @@ class AttachmentController extends Base
 	{
 		parent::__construct($options, $template);
 		$data = $this->mapper->findOne();
-		$data = $this->addDataToPayload($data);
+		$data = $this->mapper->addDataToPayload($data);
 		$this->render($data);
 	}
 }
