@@ -138,6 +138,7 @@ abstract class Base
 
 		unset($item->guid);
 
+		$item->post_content = apply_filters("the_content", $item->post_content);
 		$item->post_excerpt = $this->createExcerpt($item);
 		$item->taxonomy = $this->getTerms($item);
 
