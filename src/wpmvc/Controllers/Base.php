@@ -127,8 +127,6 @@ abstract class Base
 		if (empty($data)) {
 			Application::$router->notFound();
 		}
-
-		// print_r($data); die();
 		
 		$engine = Application::$templateEngine;
 		$engine->render($this->template, $data);

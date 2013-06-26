@@ -35,6 +35,12 @@ abstract class Base
 		$this->prepareOptions($options);		
 	}
 
+	/**
+	 * Fill a model's properties with the values
+	 * from the given recordset
+	 * @param $recordset Object of array of obejcts
+	 * @return array
+	 */
 	protected function hydrate($recordset)
 	{
 		if (empty($recordset)) {

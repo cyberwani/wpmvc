@@ -7,12 +7,6 @@ class AttachmentMapper extends Base
 	protected $object = "Attachment";
 	protected $collection = "AttachmentCollection";
 
-	/**
-	 * * Run any necessary alterations/additions
-	 * to the options and then set off to the model.
-	 * @param  array $options Key/value query options
-	 * @return null
-	 */
 	protected function prepareOptions($options)
 	{
 		$options["type"] = "attachment";
