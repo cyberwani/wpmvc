@@ -123,7 +123,7 @@ abstract class Base
 	protected function addDataToPayload($payload)
 	{
 		// add stuff
-		// $payload["stuff"] => "stuff";
+		// $payload["stuff"] = "stuff";
 
 		return $payload;
 	}
