@@ -36,35 +36,6 @@ abstract class Base
 	}
 
 	/**
-	 * Fill a model's properties with the values
-	 * from the given recordset
-	 * @param $recordset Object of array of obejcts
-	 * @return array
-	 */
-	protected function hydrate($recordset)
-	{
-		if (empty($recordset)) {
-			return $recordset;
-		}
-
-		if (is_array($recordset)) {
-
-			$data = array_map(function($item) {
-				$model = ClassFinder::find("Models", ucfirst($item->post_type));
-				return new $model($item);
-			}, $recordset);
-
-		} else {
-			$model = ClassFinder::find("Models", ucfirst($this->object));
-			$data = new $model($recordset);
-		}
-
-		return array(
-			"result" => $data
-		);
-	}
-
-	/**
 	 * Run any necessary alterations/additions
 	 * to the options and then set off to the model.
 	 * @param  array $options Key/value query options
@@ -117,12 +88,13 @@ abstract class Base
 	 */
 	public function addDataToPayload()
 	{
-		// add stuff
+		// example
 		// $this->data["stuff"] = "stuff";
 	}
 
 	/**
-	 * Add additional data the WP_Query did not provide.
+	 * Add additional data to each result in addition
+	 * to what WP_Query provided.
 	 * @param  array $results Resultset
 	 * @return array Resultset
 	 */
@@ -134,8 +106,8 @@ abstract class Base
 	}
 
 	/**
-	 * Add data to an individual item
-	 * @param object $item Result object
+	 * Add (or alter) data on an individual item
+	 * @param object $item WP object
 	 */
 	protected function addDataToResult($item)
 	{
@@ -154,8 +126,36 @@ abstract class Base
 	}
 
 	/**
-	 * If an except doesn't exist already,
-	 * one is created. 
+	 * Fill a model's properties with the values
+	 * from the given recordset
+	 * @param $recordset Object of array of obejcts
+	 * @return array
+	 */
+	protected function hydrate($recordset)
+	{
+		if (empty($recordset)) {
+			return $recordset;
+		}
+
+		if (is_array($recordset)) {
+
+			$data = array_map(function($item) {
+				$model = ClassFinder::find("Models", ucfirst($item->post_type));
+				return new $model($item);
+			}, $recordset);
+
+		} else {
+			$model = ClassFinder::find("Models", ucfirst($this->object));
+			$data = new $model($recordset);
+		}
+
+		return array(
+			"result" => $data
+		);
+	}
+
+	/**
+	 * If an except doesn't exist already, create one. 
 	 * @param  object $item Post object
 	 * @return string The excerpt
 	 */
