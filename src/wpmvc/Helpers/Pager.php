@@ -12,8 +12,7 @@ class Pager
 
 	/**
 	 * [__construct description]
-	 * @param object $query Query helper object
-	 * @param string $type  "collection" or "post"
+	 * @param array $args Keys of totalPages, currentPage, and id (if applicable)
 	 */
 	public function __construct($args)
 	{
@@ -21,11 +20,6 @@ class Pager
 			if (property_exists($this, $k)) {
 				$this->$k = $v;
 			}
-		}
-
-		if (!is_null($this->id)) {
-			global $post;
-			$post = get_post($this->id);
 		}
 	}
 

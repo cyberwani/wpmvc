@@ -88,8 +88,17 @@ abstract class Base
 	 */
 	public function addDataToPayload()
 	{
-		// example
-		// $this->data["stuff"] = "stuff";
+		$args = array(
+			"totalPages" => $this->query->getTotalPages(),
+			"currentPage" => $this->query->getCurrentPage()
+		);
+
+		if (isset($this->data["result"]->id)) {
+			$args["id"] = $this->data["result"]->id;
+		}
+		$pager = new \wpmvc\Helpers\Pager($args);
+
+		$this->data["pagination"] = $pager->paginate();
 	}
 
 	/**

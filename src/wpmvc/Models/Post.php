@@ -28,8 +28,7 @@ class Post extends Base
 	public $taxonomy = array();
 	public $attachments = array();
 	public $featured_image = array();
-	public $pagination = array();
-
+	
 	public function __construct($recordset)
 	{
 		parent::__construct($recordset);
