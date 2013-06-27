@@ -6,10 +6,6 @@ use \wpmvc\Application;
 
 class ClassFinder
 {
-	protected static $addGroup = array(
-		"Mappers", "Controllers"
-	);
-
 	/**
 	 * Find the right class to call; either the user's class
 	 * that extends one of WPMVC's or the origin WPMVC class.
