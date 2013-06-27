@@ -193,7 +193,8 @@ abstract class Base
 		$terms = array();
 
 		foreach ($taxonomies as $taxonomy) {
-			$terms[$taxonomy] = wp_get_post_terms($item->ID, $taxonomy);
+			$nickname = str_replace("post_", "", $taxonomy);
+			$terms[$nickname] = wp_get_post_terms($item->ID, $taxonomy);
 		}
 
 		return $terms;
