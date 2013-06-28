@@ -213,17 +213,4 @@ abstract class Base
 		
 		return $mapper->data["result"];
 	}
-
-	protected function getFeaturedImage($item)
-	{
-		$args = array(
-			"id" => get_post_thumbnail_id($item->ID),
-			"status" => "any"
-		);
-
-		$mapper = new AttachmentMapper($args);
-		$mapper->findOne();
-		
-		return $mapper->data["result"];
-	}
 }

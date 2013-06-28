@@ -23,8 +23,26 @@ class PostMapper extends Base
 
 		$item->url = get_permalink($item->ID);
 		$item->attachments = $this->getAttachments($item);
-		$item->featuredImage = $this->getFeaturedImage($item);
+		$item->featured_image = $this->getFeaturedImage($item);
 
 		return $item;
+	}
+
+	/**
+	 * Get the featured image on the given item.
+	 * @param  object $item Post object
+	 * @return array
+	 */
+	protected function getFeaturedImage($item)
+	{
+		$args = array(
+			"id" => get_post_thumbnail_id($item->ID),
+			"status" => "any"
+		);
+
+		$mapper = new AttachmentMapper($args);
+		$mapper->findOne();
+		
+		return $mapper->data["result"];
 	}
 }

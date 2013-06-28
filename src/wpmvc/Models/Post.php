@@ -27,7 +27,7 @@ class Post extends Base
 	public $comment_count;
 	public $taxonomy = array();
 	public $attachments = array();
-	public $featured_image = array();
+	public $featured_image;
 	
 	public function __construct($recordset)
 	{
