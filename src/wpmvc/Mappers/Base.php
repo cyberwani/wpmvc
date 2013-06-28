@@ -183,7 +183,7 @@ abstract class Base
 
 	/**
 	 * Gets terms on the given item for all
-	 * taxonomies attached to the item's posty type.
+	 * taxonomies attached to the item's post type.
 	 * @param  object $item Post object
 	 * @return array
 	 */
@@ -200,6 +200,12 @@ abstract class Base
 		return $terms;
 	}
 
+	/**
+	 * Get attachments that are related to
+	 * the given item.
+	 * @param  object $item Post object
+	 * @return array
+	 */
 	protected function getAttachments($item)
 	{
 		$args = array(
