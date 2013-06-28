@@ -14,9 +14,6 @@
     "require": {
         "php": ">=5.3.7"
     },
-    "suggest": {
-        "slim/slim": "2.2.0"
-    },
     "autoload": {
         "psr-0" : {
             "wpmvc" : "src/"
