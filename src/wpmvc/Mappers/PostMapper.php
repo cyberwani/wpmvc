@@ -36,8 +36,14 @@ class PostMapper extends Base
 	 */
 	protected function getFeaturedImage($item)
 	{
+		$featureId = get_post_thumbnail_id($item->ID);
+
+		if (empty($featureId)) {
+			return null;
+		}
+
 		$args = array(
-			"id" => get_post_thumbnail_id($item->ID),
+			"id" => $featureId,
 			"status" => "any"
 		);
 
