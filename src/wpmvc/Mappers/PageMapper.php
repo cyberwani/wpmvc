@@ -24,6 +24,7 @@ class PageMapper extends Base
 
 		$item->url = get_permalink($item->ID);
 		$item->attachments = $this->getAttachments($item);
+		$item->meta = get_post_meta($item->ID);
 
 		return $item;
 	}

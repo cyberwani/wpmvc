@@ -26,6 +26,7 @@ class Page extends Base
 	public $comment_status;
 	public $comment_count;
 	public $attachments = array();
+	public $meta = array();
 
 	public function __construct($recordset)
 	{
