@@ -28,6 +28,7 @@ class Post extends Base
 	public $taxonomy = array();
 	public $attachments = array();
 	public $featured_image;
+	public $meta = array();
 	
 	public function __construct($recordset)
 	{
