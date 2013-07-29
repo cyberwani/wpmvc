@@ -57,7 +57,7 @@ $templateDir = __DIR__ . "/app/views";
 $template = new \wpmvc\Adapters\TemplateEngines\Twig($templateDir);
 
 // set the enigine in WPMVC
-\wpmvc\Application\Application::setTemplateEngine($template);
+\wpmvc\Application::setTemplateEngine($template);
 ```
 
 
@@ -68,7 +68,7 @@ __Set the router engine__
 $router = new \wpmvc\Adapters\Routers\Slim\Router();
 
 // set the enigine in WPMVC
-\wpmvc\Application\Application::setRouter($router);
+\wpmvc\Application::setRouter($router);
 ```
 
 WPMVC is now all setup. Let's get on to the fun stuff.
