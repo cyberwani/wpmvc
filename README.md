@@ -73,13 +73,13 @@ $router = new \wpmvc\Adapters\Routers\Slim\Router();
 
 WPMVC is now all setup. Let's get on to the fun stuff.
 
-## Routing
-Each route will need to instantiate a controller based on the type of data you're looking for &mdash; post, page, attachment, or a collection or posts, pages, or attachments.
+## <a name="routing"></a>Routing
+Each route will need to instantiate a controller based on the type of data you're looking for &mdash; post, page, attachment, or a collection of posts, pages, or attachments.
 
-Each controller accepts two optional arguments: an array of options (for example, number of items to return or a taxonomy term to narrow the results by &mdash; see documentation in `Controllers/Base.php` for full details until I can write some more documentation) and a string representing the location of the template to render the data in (see Templating below).
+Each controller accepts two optional arguments: an array of options (for example, number of items to return or a taxonomy term to narrow the results by &mdash; see documentation in `Controllers/Base.php` for full details until I can write some more documentation) and a string representing the location of the template to render the data in (see [templating](#templating)).
 
 ### Collections
-The following route creates a collection controller that looks for the five most recent posts. The data is then rendered into the `post` template in the templates directory I indicated when setting up the template engine.
+The following route creates a collection controller that looks for the five most recent posts. The data is then rendered into the `post` template (this is the default) in the templates directory I indicated when setting up the template engine.
 
 ```php
 $router->get("/", function() {
@@ -132,7 +132,7 @@ $router->get("/:slug", function ($slug) {
 
 
 
-## Templating
+## <a name="templating"></a>Templating
 After the controller gets the data from the mapper, it renders a template with that data. By default, WPMVC loads a template with the name of the controller you called relative to the templates directory set in the template engine adapter. The template adapter takes care of adding the file extension, so pass `templateName` instead of `templateName.twig`.
 
 ### Examples
