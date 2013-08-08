@@ -124,9 +124,6 @@ abstract class Base
 		$item->post_date_gmt = strtotime($item->post_date_gmt);
 		$item->post_modified = strtotime($item->post_modified);
 		$item->post_modified_gmt = strtotime($item->post_modified_gmt);
-
-		unset($item->guid);
-
 		$item->post_content = apply_filters("the_content", $item->post_content);
 		$item->post_excerpt = $this->createExcerpt($item);
 		$item->taxonomy = $this->getTerms($item);
