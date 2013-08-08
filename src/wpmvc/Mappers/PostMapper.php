@@ -23,7 +23,7 @@ class PostMapper extends Base
 
 		$item->url = get_permalink($item->ID);
 		$item->attachments = $this->getAttachments($item);
-		$item->featured_image = $this->getFeaturedImage($item);
+		// $item->featured_image = $this->getFeaturedImage($item);
 		$item->meta = get_post_meta($item->ID);
 
 		return $item;
