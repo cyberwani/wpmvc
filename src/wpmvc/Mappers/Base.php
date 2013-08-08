@@ -143,10 +143,10 @@ abstract class Base
 	protected function hydrate($recordset)
 	{
 		if (empty($recordset)) {
-			return $recordset;
+			$data = $recordset;
 		}
 
-		if (is_array($recordset)) {
+		else if (is_array($recordset)) {
 
 			$data = array_map(function($item) {
 				$model = ClassFinder::find("Models", ucfirst($item->post_type));
