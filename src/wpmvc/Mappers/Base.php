@@ -192,6 +192,9 @@ abstract class Base
 		foreach ($taxonomies as $taxonomy) {
 			$nickname = str_replace("post_", "", $taxonomy);
 			$terms[$nickname] = wp_get_post_terms($item->ID, $taxonomy);
+			$terms[$nickname] = array_map(function($term) {
+				return new \wpmvc\Models\Term($term);
+			}, $terms[$nickname]);
 		}
 
 		return $terms;
