@@ -7,7 +7,6 @@ use \wpmvc\Helpers\ClassFinder;
 class AttachmentMapper extends Base
 {
 	protected $object = "Attachment";
-	protected $collection = "AttachmentCollection";
 
 	/**
 	 * Fill a model's properties with the values

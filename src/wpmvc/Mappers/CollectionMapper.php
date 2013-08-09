@@ -8,7 +8,7 @@ class CollectionMapper extends Base
 {
 	protected function wpmvcAddData($item)
 	{
-		$mapper = ClassFinder::find("Mappers", ucfirst($item->post_type) . "Mapper");
+		$mapper = ClassFinder::find("Mappers", ucfirst($item->post_type));
 		$mapper = new $mapper(array());
 
 		$item = $mapper->wpmvcAddData($item);

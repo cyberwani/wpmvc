@@ -112,7 +112,7 @@ abstract class Base
 			$this->template = $template;
 		}
 
-		$mapper = ClassFinder::find("Mappers", $this->mapperName);
+		$mapper = ClassFinder::find("Mappers", $this->object);
 		$this->mapper = new $mapper($options);
 	}
 
