@@ -17,17 +17,12 @@ class Attachment extends Base
 	public $id;
 	public $type;
 	public $url;
-	public $author;
 	public $publish_date;
 	public $last_modified;
 	public $description;
 	public $title;
 	public $caption;
 	public $alt_text;
-	public $status;
-	public $slug;
-	public $comment_status;
-	public $comment_count;
 
 	public function __construct($recordset)
 	{

@@ -7,7 +7,9 @@ class Post extends Base
 	protected $fieldMap = array(
 		"ID" => "id",
 		"post_date" => "publish_date",
+		"post_date_gmt" => "publish_date_gmt",
 		"post_modified" => "last_modified",
+		"post_modified_gmt" => "last_modified_gmt",
 		"post_name" => "slug"
 	);
 	
@@ -16,7 +18,9 @@ class Post extends Base
 	public $url;
 	public $author;
 	public $publish_date;
+	public $publish_date_gmt;
 	public $last_modified;
+	public $last_modified_gmt;
 	public $content;
 	public $title;
 	public $excerpt;
