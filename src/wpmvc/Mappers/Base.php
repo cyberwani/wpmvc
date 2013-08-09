@@ -66,7 +66,7 @@ abstract class Base
 	{
 		$recordset = array_shift($this->find());
 		$this->data = $this->hydrate($recordset);
-		$this->addDataToPayload();
+		$this->wpmvcAddToPayload();
 		return $this->data;
 	}
 
@@ -78,15 +78,18 @@ abstract class Base
 	{
 		$recordset = $this->find();
 		$this->data = $this->hydrate($recordset);
-		$this->addDataToPayload();
+		$this->wpmvcAddToPayload();
+		$this->addToPayload();
 		return $this->data;
 	}
 
 	/**
-	 * Adds the ability to add payload-wide data.
+	 * Adds various things to the entire payload.
+	 * Used internally by WPMVC. The method addToPayload()
+	 * is available to end users for this puspose.
 	 * @return $this
 	 */
-	public function addDataToPayload()
+	public function wpmvcAddToPayload()
 	{
 		$args = array(
 			"totalPages" => $this->query->getTotalPages(),
@@ -99,6 +102,16 @@ abstract class Base
 		$pager = new \wpmvc\Helpers\Pager($args);
 
 		$this->data["pagination"] = $pager->paginate();
+	}
+
+	/**
+	 * Used by user-end mappers to add data to the entire
+	 * payload. Child mappers in WPMVC use wpmvcAddToPayload()
+	 * @return $this
+	 */
+	public function addToPayload()
+	{
+		
 	}
 
 	/**
@@ -118,7 +131,7 @@ abstract class Base
 	/**
 	 * Add (or alter) data on an individual item. This method
 	 * is used internally by WPMVC. The method addData() is
-	 * available to end users for this purpose as well.
+	 * available to end users for this purpose as.
 	 * @param object $item WP object
 	 */
 	protected function wpmvcAddData($item)
@@ -135,7 +148,7 @@ abstract class Base
 	}
 
 	/**
-	 * Used for user-end mappers to add data to each item in the result
+	 * Used bye user-end mappers to add data to each item in the result
 	 * set. Child mappers in WPMVC piggyback off wpmvcAddData().
 	 * @param object $item WP object
 	 */
