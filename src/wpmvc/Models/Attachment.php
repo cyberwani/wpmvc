@@ -7,8 +7,6 @@ class Attachment extends Base
 	protected $fieldMap = array(
 		"ID" => "id",
 		"post_mime_type" => "type",
-		"post_date" => "publish_date",
-		"post_modified" => "last_modified",
 		"post_name" => "slug",
 		"post_excerpt" => "caption",
 		"post_content" => "description"
@@ -17,12 +15,9 @@ class Attachment extends Base
 	public $id;
 	public $type;
 	public $url;
-	public $publish_date;
-	public $last_modified;
 	public $description;
 	public $title;
 	public $caption;
-	public $alt_text;
 
 	public function __construct($recordset)
 	{
