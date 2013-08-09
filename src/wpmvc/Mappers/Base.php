@@ -110,15 +110,18 @@ abstract class Base
 	protected function mapExtraDataToEachResult($results)
 	{
 		return array_map(function($item) {
-			return $this->addDataToResult($item);
+			$item = $this->wpmvcAddData($item);
+			return $this->addData($item);
 		}, $results);
 	}
 
 	/**
-	 * Add (or alter) data on an individual item
+	 * Add (or alter) data on an individual item. This method
+	 * is used internally by WPMVC. The method addData() is
+	 * available to end users for this purpose as well.
 	 * @param object $item WP object
 	 */
-	protected function addDataToResult($item)
+	protected function wpmvcAddData($item)
 	{
 		$item->post_date = strtotime($item->post_date);
 		$item->post_date_gmt = strtotime($item->post_date_gmt);
@@ -128,6 +131,16 @@ abstract class Base
 		$item->post_excerpt = $this->createExcerpt($item);
 		$item->taxonomy = $this->getTerms($item);
 
+		return $item;
+	}
+
+	/**
+	 * Used for user-end mappers to add data to each item in the result
+	 * set. Child mappers in WPMVC piggyback off wpmvcAddData().
+	 * @param object $item WP object
+	 */
+	protected function addData($item)
+	{
 		return $item;
 	}
 

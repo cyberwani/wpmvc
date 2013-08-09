@@ -18,9 +18,9 @@ class PageMapper extends Base
 		parent::prepareOptions($options);
 	}
 
-	protected function addDataToResult($item)
+	protected function wpmvcAddData($item)
 	{
-		$item = parent::addDataToResult($item);
+		$item = parent::wpmvcAddData($item);
 
 		$item->url = get_permalink($item->ID);
 		$item->attachments = $this->getAttachments($item);

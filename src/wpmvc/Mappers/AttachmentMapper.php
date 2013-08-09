@@ -75,9 +75,9 @@ class AttachmentMapper extends Base
 		parent::prepareOptions($options);
 	}
 
-	protected function addDataToResult($item)
+	protected function wpmvcAddData($item)
 	{
-		$item = parent::addDataToResult($item);
+		$item = parent::wpmvcAddData($item);
 
 		$item->url = wp_get_attachment_url($item->ID);
 		$item->alt_text = get_post_meta($item->ID, "_wp_attachment_image_alt", true);
