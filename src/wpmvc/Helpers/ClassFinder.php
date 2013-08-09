@@ -22,8 +22,10 @@ class ClassFinder
 	{
 		$name = ClassFinder::fullname($group, $name);
 
+		// try the user's namespace
 		$class = Application::$appNamespace . "\\{$group}\\{$name}";
 
+		// try WPMVC's namespace
 		if (!class_exists($class)) {
 			$class = "\\wpmvc\\{$group}\\{$name}";
 		}
