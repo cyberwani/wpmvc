@@ -22,10 +22,22 @@ class PostMapper extends Base
 
 		$item->url = get_permalink($item->ID);
 		$item->attachments = $this->getAttachments($item);
-		// $item->featured_image = $this->getFeaturedImage($item);
+		if ($this->hasFeatured()) {
+			$item->featured_image = $this->getFeaturedImage($item);
+		}
 		$item->meta = get_post_meta($item->ID);
 
 		return $item;
+	}
+
+	/**
+	 * Checks to see if the theme supports featured images.
+	 * @return boolean TRUE if theme supports featured images;
+	 *                 FALSE if theme does not support featured images.
+	 */
+	protected function hasFeatured()
+	{
+		return get_theme_support("post-thumbnails");
 	}
 
 	/**

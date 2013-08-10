@@ -1,6 +1,6 @@
 {
     "name": "jenwachter/wpmvc",
-    "description": "A lightweight PHP framework to use WordPress as MVC.",
+    "description": "A PHP framework to use WordPress as MVC.",
     "keywords": ["wordpress", "mvc"],
     "homepage": "https://github.com/jenwachter/wpmvc",
     "license": "MIT",
