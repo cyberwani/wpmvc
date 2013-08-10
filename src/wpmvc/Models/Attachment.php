@@ -6,7 +6,6 @@ class Attachment extends Base
 {
 	protected $fieldMap = array(
 		"ID" => "id",
-		"post_mime_type" => "type",
 		"post_name" => "slug",
 		"post_excerpt" => "caption",
 		"post_content" => "description"
