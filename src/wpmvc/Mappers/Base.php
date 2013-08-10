@@ -89,7 +89,7 @@ abstract class Base
 	 * is available to end users for this puspose.
 	 * @return $this
 	 */
-	public function wpmvcAddToPayload()
+	protected function wpmvcAddToPayload()
 	{
 		$args = array(
 			"totalPages" => $this->query->getTotalPages(),
@@ -109,7 +109,7 @@ abstract class Base
 	 * payload. Child mappers in WPMVC use wpmvcAddToPayload()
 	 * @return $this
 	 */
-	public function addToPayload()
+	protected function addToPayload()
 	{
 		
 	}
