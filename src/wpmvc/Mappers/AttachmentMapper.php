@@ -29,7 +29,7 @@ class AttachmentMapper extends Base
 			}, $recordset);
 
 		} else {
-			$type = $this->getType($item);
+			$type = $this->getType($recordset);
 			$model = ClassFinder::find("Models\\Attachments", ucfirst($type));
 			$data = new $model($recordset);
 		}

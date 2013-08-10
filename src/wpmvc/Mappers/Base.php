@@ -64,7 +64,8 @@ abstract class Base
 	 */
 	public function findOne()
 	{
-		$recordset = array_shift($this->find());
+		$found = $this->find();
+		$recordset = array_shift($found);
 		$this->data = $this->hydrate($recordset);
 		$this->wpmvcAddToPayload();
 		return $this->data;
