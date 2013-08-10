@@ -103,6 +103,7 @@ abstract class Base
 		$pager = new \wpmvc\Helpers\Pager($args);
 
 		$this->data["pagination"] = $pager->paginate();
+		$this->data["site"] = $this->getSiteDate();
 	}
 
 	/**
@@ -113,6 +114,33 @@ abstract class Base
 	protected function addToPayload()
 	{
 		
+	}
+
+	protected function getSiteDate()
+	{
+		return array(
+			"name" =>  get_bloginfo("name"),
+			"description" => get_bloginfo("description"),
+			"wpurl" => get_bloginfo("wpurl"),
+			"url" => get_bloginfo("url"),
+			"admin_email" => get_bloginfo("admin_email"),
+			"charset" => get_bloginfo("charset"),
+			"version" => get_bloginfo("version"),
+			"html_type" => get_bloginfo("html_type"),
+			"text_direction" => get_bloginfo("text_direction"),
+			"language" => get_bloginfo("language"),
+			"header" => $this->captureEcho("wp_head"),
+			"footer" => $this->captureEcho("wp_footer")
+		);
+	}
+
+	protected function captureEcho($method)
+	{
+		ob_start();
+		$method();
+		$content = ob_get_contents();
+		ob_end_clean();
+		return $content;
 	}
 
 	/**
