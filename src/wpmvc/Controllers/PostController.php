@@ -4,7 +4,7 @@ namespace wpmvc\Controllers;
 
 class PostController extends Base
 {
-	protected $mapperName = "PostMapper";
+	protected $object = "Post";
 
 	/**
 	 * Default template name

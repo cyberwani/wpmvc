@@ -211,7 +211,7 @@ abstract class Base
 		}
 
 		return array(
-			"result" => $data
+			"results" => $data
 		);
 	}
 

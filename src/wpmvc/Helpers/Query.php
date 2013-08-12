@@ -9,7 +9,8 @@ class Query
 	 * @var array
 	 */
 	protected $queryArgs = array(
-		"fields" => "ids"
+		"fields" => "ids",
+		"type" => "post"
 	);
 
 	/**
@@ -41,11 +42,6 @@ class Query
 	{
 		// get posts per page from WP
 		$this->queryArgs["posts_per_page"] = get_option("posts_per_page");
-
-		// set default type to all custom post types and built in post types
-		if (!isset($options["type"])) {
-			$options["type"] = get_post_types(array("_builtin" => false)) + array("post");
-		}
 
 		// build the WP_Query
 		foreach ($options as $k => $v) {

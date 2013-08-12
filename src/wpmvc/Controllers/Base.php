@@ -90,12 +90,10 @@ abstract class Base
 	 * time {mixed}			Returns content published on a specific date (string "YYYY-MM-DD")
 	 * 						or in a date range (array("YYYY-MM-DD", "YYYY-MM-DD"))
 	 *
-	 * slug {string}		Post slug. Example: "designing-apis"
+	 * slug {string}		Post slug.
 	 *
-	 * type {string}    	The type of content to retrieve -- either "post" or
-	 * 						"page." It is only necessary to use this option
-	 * 					 	when looking for a collection of pages as it defaults
-	 * 					  	to "post."
+	 * type {string}    	The type of content to retrieve -- either post, page, attachment,
+	 * 						or a custom post type. Default: post
 	 *
 	 * year {int}			Retrieves content published during a specific year (YYYY)
 	 *

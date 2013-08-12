@@ -4,7 +4,7 @@ namespace wpmvc\Controllers;
 
 class PageController extends Base
 {
-	protected $mapperName = "PageMapper";
+	protected $object = "Page";
 
 	/**
 	 * Default template name

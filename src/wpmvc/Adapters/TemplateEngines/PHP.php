@@ -19,7 +19,6 @@ class PHP implements \wpmvc\Interfaces\TemplateEngine
 	 */
 	public function render($path, $data)
 	{
-		$data = $data;
 		include $this->baseDir . $path . ".php";
 	}
 }
