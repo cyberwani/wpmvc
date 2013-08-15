@@ -255,17 +255,6 @@ class Query
 	}
 
 	/**
-	 * Converts the pagination option into WP_Query friendly arguments.
-	 * @param  boolean $v
-	 * @return $this
-	 */
-	protected function build__pagination($v)
-	{
-		$this->queryArgs["nopaging"] = $v;
-		return $this;
-	}
-
-	/**
 	 * Converts the path option into WP_Query friendly arguments.
 	 * @param  array $v
 	 * @return $this

@@ -60,9 +60,6 @@ abstract class Base
 	 * 						https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters
 	 * 
 	 * page {int}       	Combined with per_page, creates an offset. Default: 1.
-	 * 
-	 * pagination {boolean} Whether or not to paginate the results. If set to false,
-	 * 						all results are returned. Default: TRUE
 	 *
 	 * path {string}		Page path. Example: "/services/development/about"
 	 *
