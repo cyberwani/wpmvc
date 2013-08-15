@@ -66,6 +66,7 @@ class AttachmentMapper extends Base
 	protected function prepareOptions($options)
 	{
 		$options["type"] = "attachment";
+		$options["status"] = "inherit";
 		if (isset($options["id"])) {
 			$options["p"] = $options["id"];
 			unset($options["id"]);
@@ -82,5 +83,10 @@ class AttachmentMapper extends Base
 		$item->alt_text = get_post_meta($item->ID, "_wp_attachment_image_alt", true);
 
 		return $item;
+	}
+
+	protected function wpmvcAddToPayload()
+	{
+		$this->data["site"] = $this->getSiteDate();
 	}
 }

@@ -27,4 +27,9 @@ class PageMapper extends Base
 
 		return $item;
 	}
+
+	protected function wpmvcAddToPayload()
+	{
+		$this->data["site"] = $this->getSiteDate();
+	}
 }

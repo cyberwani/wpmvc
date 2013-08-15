@@ -6,7 +6,6 @@ class Attachment extends Base
 {
 	protected $fieldMap = array(
 		"ID" => "id",
-		"post_name" => "slug",
 		"post_excerpt" => "caption",
 		"post_content" => "description"
 	);
@@ -15,7 +14,6 @@ class Attachment extends Base
 	public $type;
 	public $url;
 	public $description;
-	public $title;
 	public $caption;
 
 	public function __construct($recordset)

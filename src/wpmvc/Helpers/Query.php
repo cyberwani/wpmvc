@@ -10,7 +10,7 @@ class Query
 	 */
 	protected $queryArgs = array(
 		"fields" => "ids",
-		"type" => "post"
+		"post_type" => "post"
 	);
 
 	/**

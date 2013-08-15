@@ -68,6 +68,7 @@ abstract class Base
 		$recordset = array_shift($found);
 		$this->data = $this->hydrate($recordset);
 		$this->wpmvcAddToPayload();
+		$this->addToPayload();
 		return $this->data;
 	}
 
@@ -92,18 +93,23 @@ abstract class Base
 	 */
 	protected function wpmvcAddToPayload()
 	{
+		$this->addPagination();
+		$this->data["site"] = $this->getSiteDate();
+	}
+
+	protected function addPagination()
+	{
 		$args = array(
 			"totalPages" => $this->query->getTotalPages(),
 			"currentPage" => $this->query->getCurrentPage()
 		);
 
-		if (isset($this->data["result"]->id)) {
-			$args["id"] = $this->data["result"]->id;
+		if (isset($this->data["results"]->id)) {
+			$args["id"] = $this->data["results"]->id;
 		}
 		$pager = new \wpmvc\Helpers\Pager($args);
 
 		$this->data["pagination"] = $pager->paginate();
-		$this->data["site"] = $this->getSiteDate();
 	}
 
 	/**
