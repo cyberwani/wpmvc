@@ -29,6 +29,11 @@ The recommended method of installation is via [Composer](http://getcomposer.org/
 Or, if you want to do your own thing, you can find the [repo on GitHub](https://github.com/jenwachter/wpmvc).
 
 
+## Documentation
+
+[Read the full documentation](http://jenwachter.com/projects/wpmvc/).
+
+
 ## Changelog
 
 No official releases as of yet.
