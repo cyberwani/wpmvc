@@ -1,7 +1,6 @@
 # WordPress MVC (WPMVC)
 
-Interested in using WordPress for the backend of a website, but not so much for the frontend? WPMVC is a framework to use WordPress as a model-view-controller (MVC) application, separating logic from presentation.
-Note: This project and its documentation are still under active development, so use in production with extreme caution.
+A framework for using WordPress as a model-view-controller application. Note: This project and its documentation are still under active development, so use in production with extreme caution.
 
 ## Requirements
 
