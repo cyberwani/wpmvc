@@ -119,8 +119,8 @@ abstract class Base
 	 */
 	protected function render($data)
 	{
-		if (empty($data)) {
-			Application::$router->notFound();
+		if (empty($data["results"])) {
+			throw new \Exception("Not found", 404);
 		}
 		
 		$engine = Application::$templateEngine;

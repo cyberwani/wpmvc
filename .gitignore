@@ -1,2 +1,4 @@
 *.DS_STORE
 vendor
+src/wpmvc/Adapters/Routers/*
+src/wpmvc/Interfaces/Router.php
