@@ -4,11 +4,6 @@ namespace wpmvc;
 
 class Application
 {
-    /**
-     * Router object
-     * @var \wpmvc\Interfaces\Router
-     */
-    public static $router;
 
     /**
      * Template engine object
@@ -21,16 +16,6 @@ class Application
      * @var string
      */
     public static $appNamespace = "\\app";
-
-    /**
-     * Set the router to the application so methods,
-     * such as notFound(), can be used within WPMVC.
-     * @param \wpmvc\Interfaces\Router $router Router adapter
-     */
-    public static function setRouter(\wpmvc\Interfaces\Router $router)
-    {
-        static::$router = $router;
-    }
 
     /**
      * Set te template engine to the applicaton so methods,
