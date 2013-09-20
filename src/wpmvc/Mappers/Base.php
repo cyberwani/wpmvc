@@ -240,6 +240,24 @@ abstract class Base
 		return rtrim($excerpt, ".");
 	}
 
+	protected function getMeta($id)
+	{
+		$meta = get_post_meta($id);
+		$pretty = array();
+		foreach ($meta as $k => $v) {
+			$first = substr($k, 0, 1);
+			if ($first == "_") {
+				$k = substr($k, 1);
+			}
+			if (count($v) == 1) {
+				$v = array_pop($v);
+			}
+			$pretty[$k] = $v;
+		}
+
+		return $pretty;
+	}
+
 	/**
 	 * Gets terms on the given item for all
 	 * taxonomies attached to the item's post type.

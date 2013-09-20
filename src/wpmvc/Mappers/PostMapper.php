@@ -25,7 +25,7 @@ class PostMapper extends Base
 		if ($this->hasFeatured()) {
 			$item->featured_image = $this->getFeaturedImage($item);
 		}
-		$item->meta = get_post_meta($item->ID);
+		$item->meta = $this->getMeta($item->ID);
 		$item->author = $this->getAuthor($item);
 
 		return $item;
