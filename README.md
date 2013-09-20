@@ -33,6 +33,11 @@ Or, if you want to do your own thing, you can find the [repo on GitHub](https://
 [Read the full documentation](http://jenwachter.com/projects/wpmvc/).
 
 
+## Feedback
+
+Are you using WPMVC or are you curious about it? I'd love to [hear from you](mailto:jenleighkelly@gmail.com).
+
+
 ## Some things still to do
 
 * How does WPMVC interact with WordPress permalinks
