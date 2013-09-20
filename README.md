@@ -17,13 +17,13 @@ A framework for using WordPress as a model-view-controller application. __Note: 
 
 The recommended method of installation is via [Composer](http://getcomposer.org/) as it will take care of autoloading WPMVC for you. Simply include the following in a `composer.json` file in the root of your project and run `composer update` from the command line.
 
-{% highlight javascript %}
+```javascript
 {
     "require": {
         "jenwachter/wpmvc": "dev-master"
     }
 }
-{% endhighlight %}
+```
 
 Or, if you want to do your own thing, you can find the [repo on GitHub](https://github.com/jenwachter/wpmvc).
 
