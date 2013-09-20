@@ -12,6 +12,7 @@ class Term extends Base
 	public $id;
 	public $name;
 	public $slug;
+	public $url;
 	public $group;
 	public $description;
 	public $parent;
