@@ -68,6 +68,7 @@ abstract class Base
 		$recordset = array_shift($found);
 		$this->data = $this->hydrate($recordset);
 		$this->wpmvcAddToPayload();
+		$this->addPagination();
 		$this->addToPayload();
 		return $this->data;
 	}
@@ -81,6 +82,7 @@ abstract class Base
 		$recordset = $this->find();
 		$this->data = $this->hydrate($recordset);
 		$this->wpmvcAddToPayload();
+		$this->addPagination();
 		$this->addToPayload();
 		return $this->data;
 	}
@@ -93,8 +95,7 @@ abstract class Base
 	 */
 	protected function wpmvcAddToPayload()
 	{
-		$this->addPagination();
-		$this->data["site"] = $this->getSiteDate();
+		$this->data["site"] = $this->getSiteData();
 	}
 
 	protected function addPagination()
@@ -122,7 +123,7 @@ abstract class Base
 		
 	}
 
-	protected function getSiteDate()
+	protected function getSiteData()
 	{
 		return array(
 			"name" =>  get_bloginfo("name"),
@@ -278,6 +279,18 @@ abstract class Base
 		$mapper = new AttachmentMapper($args);
 		$mapper->findMany();
 		
-		return $mapper->data["result"];
+		return $mapper->data["results"];
+	}
+
+	/**
+	 * Get the author of the given item.
+	 * @param  object $item Post object
+	 * @return array
+	 */
+	protected function getAuthor($item)
+	{
+		$mapper = new AuthorMapper($item->post_author);
+		$mapper->findOne();
+		return $mapper->data["results"];
 	}
 }

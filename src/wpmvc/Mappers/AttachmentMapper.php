@@ -35,7 +35,7 @@ class AttachmentMapper extends Base
 		}
 
 		return array(
-			"result" => $data
+			"results" => $data
 		);
 	}
 
@@ -87,6 +87,6 @@ class AttachmentMapper extends Base
 
 	protected function wpmvcAddToPayload()
 	{
-		$this->data["site"] = $this->getSiteDate();
+		$this->data["site"] = $this->getSiteData();
 	}
 }

@@ -24,12 +24,13 @@ class PageMapper extends Base
 		$item->url = get_permalink($item->ID);
 		$item->attachments = $this->getAttachments($item);
 		$item->meta = get_post_meta($item->ID);
+		$item->author = $this->getAuthor($item);
 
 		return $item;
 	}
 
 	protected function wpmvcAddToPayload()
 	{
-		$this->data["site"] = $this->getSiteDate();
+		$this->data["site"] = $this->getSiteData();
 	}
 }

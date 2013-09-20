@@ -26,6 +26,7 @@ class PostMapper extends Base
 			$item->featured_image = $this->getFeaturedImage($item);
 		}
 		$item->meta = get_post_meta($item->ID);
+		$item->author = $this->getAuthor($item);
 
 		return $item;
 	}
@@ -61,6 +62,6 @@ class PostMapper extends Base
 		$mapper = new AttachmentMapper($args);
 		$mapper->findOne();
 		
-		return $mapper->data["result"];
+		return $mapper->data["results"];
 	}
 }
