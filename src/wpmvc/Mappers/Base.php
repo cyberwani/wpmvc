@@ -53,7 +53,7 @@ abstract class Base
 	 */
 	protected function find()
 	{
-		$this->query = new \wpmvc\Helpers\Query($this->options);
+		$this->query = new \wpmvc\Helpers\Query\Post($this->options);
 		$results = $this->query->run();
 		return $this->mapExtraDataToEachResult($results);
 	}

@@ -1,8 +1,12 @@
 <?php
 
-namespace wpmvc\Helpers;
+namespace wpmvc\Helpers\Query;
 
-class Query
+/**
+ * Includes all kinds of posts -- post, page,
+ * custom post types, attachments
+ */
+class Post extends Base
 {
 	/**
 	 * WP_Query object-ready arguments
@@ -28,27 +32,21 @@ class Query
 	protected $wpquery;
 
 	/**
-	 * Resultset
-	 * @var array
-	 */
-	protected $results = array();
-
-	/**
 	 * Runs a query argument builder for each
 	 * option passed. 
 	 * @param array $options Key/value query options
 	 */
 	public function __construct($options = array())
 	{
+		parent::__construct($options);
+
 		// get posts per page from WP
 		$this->queryArgs["posts_per_page"] = get_option("posts_per_page");
 
-		// build the WP_Query
+		// custom taxonomies
 		foreach ($options as $k => $v) {
 			$method = "build__{$k}";
-			if (method_exists($this, $method)) {
-				$this->$method($v);
-			} else if (in_array($k, $this->getCustomTaxonomies())) {
+			if (in_array($k, $this->getCustomTaxonomies())) {
 				$this->build__taxonomy($k, $v);
 			}
 		}
@@ -107,20 +105,6 @@ class Query
 	}
 
 	/**
-	 * Takes care of joining an array together into
-	 * a string (if needed)
-	 * @param  mixed $v String or array
-	 * @return string
-	 */
-	protected function join($v, $char = ",")
-	{
-		if (is_array($v)) {
-			$v = implode($char, $v);
-		}
-		return $v;
-	}
-
-	/**
 	 * Converts the author option into WP_Query friendly arguments.
 	 * @param  mixed $v String, integer or array of sting and integers.
 	 * @return $this
@@ -167,17 +151,6 @@ class Query
 	}
 
 	/**
-	 * Converts the id option into WP_Query friendly arguments.
-	 * @param  int $v
-	 * @return $this
-	 */
-	protected function build__id($v)
-	{
-		$this->queryArgs["id"] = $v;
-		return $this;
-	}
-
-	/**
 	 * Converts the month option into WP_Query friendly arguments.
 	 * @param  int $v
 	 * @return $this
@@ -185,28 +158,6 @@ class Query
 	protected function build__month($v)
 	{
 		$this->queryArgs["monthnum"] = $v;
-		return $this;
-	}
-
-	/**
-	 * Converts the order option into WP_Query friendly arguments.
-	 * @param  string $v
-	 * @return $this
-	 */
-	protected function build__order($v)
-	{
-		$this->queryArgs["order"] = $v;
-		return $this;
-	}
-
-	/**
-	 * Converts the order_by option into WP_Query friendly arguments.
-	 * @param  string $v
-	 * @return $this
-	 */
-	protected function build__order_by($v)
-	{
-		$this->queryArgs["orderby"] = $v;
 		return $this;
 	}
 
