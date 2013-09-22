@@ -27,8 +27,9 @@ class Pager
 	{
 		return array(
 			"currentPage" => $this->currentPage,
-			"nextPage" => $this->nextPage(),
-			"prevPage" => $this->prevPage()
+			"total" => $this->getTotalPages(),
+			"prevPage" => $this->prevPage(),
+			"nextPage" => $this->nextPage()
 		);
 	}
 
@@ -74,5 +75,10 @@ class Pager
 		} else if (!is_null($this->currentPage) && !is_null($this->totalPages)) {
 			return $this->currentPage > 1 ? $this->currentPage - 1 : null;
 		}
+	}
+
+	protected function getTotalPages()
+	{
+		return $this->totalPages;
 	}
 }
