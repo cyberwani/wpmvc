@@ -2,8 +2,6 @@
 
 namespace wpmvc\Mappers;
 
-use \wpmvc\Helpers\ClassFinder;
-
 abstract class Base
 {
 	/**
@@ -199,28 +197,10 @@ abstract class Base
 	 * @param $recordset Object of array of obejcts
 	 * @return array
 	 */
-	protected function hydrate($recordset)
-	{
-		if (empty($recordset)) {
-			$data = $recordset;
-		}
+	abstract protected function hydrate($recordset);
 
-		else if (is_array($recordset)) {
-
-			$data = array_map(function($item) {
-				$model = ClassFinder::find("Models", ucfirst($item->post_type));
-				return new $model($item);
-			}, $recordset);
-
-		} else {
-			$model = ClassFinder::find("Models", ucfirst($this->object));
-			$data = new $model($recordset);
-		}
-
-		return array(
-			"results" => $data
-		);
-	}
+	
+	
 
 	/**
 	 * If an except doesn't exist already, create one. 

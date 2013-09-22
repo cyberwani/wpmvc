@@ -2,7 +2,7 @@
 
 namespace wpmvc\Mappers;
 
-class PageMapper extends Base
+class PageMapper extends PostMapper
 {
 	protected $object = "Page";
 

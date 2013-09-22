@@ -2,6 +2,8 @@
 
 namespace wpmvc\Mappers;
 
+use \wpmvc\Helpers\ClassFinder;
+
 class PostMapper extends Base
 {
 	protected $object = "Post";
@@ -14,6 +16,29 @@ class PostMapper extends Base
 		}
 	
 		parent::prepareOptions($options);
+	}
+
+	protected function hydrate($recordset)
+	{
+		if (empty($recordset)) {
+			$data = $recordset;
+		}
+
+		else if (is_array($recordset)) {
+
+			$data = array_map(function($item) {
+				$model = ClassFinder::find("Models", ucfirst($item->post_type));
+				return new $model($item);
+			}, $recordset);
+
+		} else {
+			$model = ClassFinder::find("Models", ucfirst($this->object));
+			$data = new $model($recordset);
+		}
+
+		return array(
+			"results" => $data
+		);
 	}
 
 	protected function wpmvcAddData($item)

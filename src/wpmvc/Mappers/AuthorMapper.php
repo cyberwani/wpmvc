@@ -45,4 +45,27 @@ class AuthorMapper extends Base
 		$user->description = $userObject->description;
 		return $user;
 	}
+
+	protected function hydrate($recordset)
+	{
+		if (empty($recordset)) {
+			$data = $recordset;
+		}
+
+		else if (is_array($recordset)) {
+
+			$data = array_map(function($item) {
+				$model = ClassFinder::find("Models", ucfirst($item->object));
+				return new $model($item);
+			}, $recordset);
+
+		} else {
+			$model = ClassFinder::find("Models", ucfirst($this->object));
+			$data = new $model($recordset);
+		}
+
+		return array(
+			"results" => $data
+		);
+	}
 }
