@@ -21,8 +21,13 @@ class CollectionController extends Base
 	 */
 	public function __construct($options = array(), $template = null)
 	{
+		// Define object based on the type option, if it was set
+		if ($options["type"]) {
+			$this->object = ucfirst($options["type"]);
+		}
+
 		parent::__construct($options, $template);
-		
+
 		$data = $this->mapper->findMany();
 		$this->render($data);
 	}
