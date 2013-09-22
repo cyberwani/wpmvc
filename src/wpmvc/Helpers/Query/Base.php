@@ -5,18 +5,30 @@ namespace wpmvc\Helpers\Query;
 abstract class Base
 {
 	/**
+	 * Options passed into the query object
+	 * @var array
+	 */
+	protected $options;
+
+	/**
 	 * Resultset
 	 * @var array
 	 */
 	protected $results = array();
 
 	/**
-	 * Runs a query argument builder for each
-	 * option passed. 
+	 * Query arguments
+	 * @var array
+	 */
+	protected $queryArgs = array();
+
+	/**
+	 * Runs a query argument builder for each option passed. 
 	 * @param array $options Key/value query options
 	 */
 	public function __construct($options = array())
 	{
+		$this->options = $options;
 		foreach ($options as $k => $v) {
 			$method = "build__{$k}";
 			if (method_exists($this, $method)) {
@@ -26,8 +38,28 @@ abstract class Base
 	}
 
 	/**
+	 * Runs the query and returns the data to the model.
+	 * @return array Resultset
+	 */
+	abstract public function run();
+
+	/**
+	 * Gets the current page of the current
+	 * query results
+	 * @return int
+	 */
+	abstract public function getCurrentPage();
+
+	/**
+	 * Gets the total number of pages available in
+	 * the current query
+	 * @return int
+	 */
+	abstract public function getTotalPages();
+
+	/**
 	 * Takes care of joining an array together into
-	 * a string (if needed)
+	 * a comma-demilited string (if needed)
 	 * @param  mixed $v String or array
 	 * @return string
 	 */

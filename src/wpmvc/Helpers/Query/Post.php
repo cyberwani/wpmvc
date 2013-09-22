@@ -8,12 +8,9 @@ namespace wpmvc\Helpers\Query;
  */
 class Post extends Base
 {
-	/**
-	 * WP_Query object-ready arguments
-	 * @var array
-	 */
 	protected $queryArgs = array(
 		"fields" => "ids",
+		"page" => 1,
 		"post_type" => "post"
 	);
 
@@ -31,17 +28,14 @@ class Post extends Base
 	 */
 	protected $wpquery;
 
-	/**
-	 * Runs a query argument builder for each
-	 * option passed. 
-	 * @param array $options Key/value query options
-	 */
 	public function __construct($options = array())
 	{
-		parent::__construct($options);
+		// if not set in options, get posts per page from WP admin
+		if (!isset($options["per_page"])) {
+			$options["per_page"] = get_option("posts_per_page");
+		}
 
-		// get posts per page from WP
-		$this->queryArgs["posts_per_page"] = get_option("posts_per_page");
+		parent::__construct($options);
 
 		// custom taxonomies
 		foreach ($options as $k => $v) {
@@ -52,6 +46,10 @@ class Post extends Base
 		}
 	}
 
+	/**
+	 * Retrive custom taxonomies.
+	 * @return array Custom taxonomy names
+	 */
 	protected function getCustomTaxonomies()
 	{
 		$all = get_taxonomies();
@@ -59,30 +57,6 @@ class Post extends Base
 		return array_diff($all, $default);
 	}
 
-	/**
-	 * Gets the total number of pages available in
-	 * the current query
-	 * @return int
-	 */
-	public function getTotalPages()
-	{
-		return $this->wpquery->max_num_pages;
-	}
-
-	/**
-	 * Gets the current page of the current
-	 * query results
-	 * @return int
-	 */
-	public function getCurrentPage()
-	{
-		return $this->wpquery->query_vars["paged"];
-	}
-
-	/**
-	 * Runs the query and returns the data to the model.
-	 * @return array Resultset
-	 */
 	public function run()
 	{
 		if (is_callable($this->filterWhere)) {
@@ -102,6 +76,16 @@ class Post extends Base
 		}
 
 		return $this->results;
+	}
+
+	public function getCurrentPage()
+	{
+		return $this->wpquery->query_vars["paged"];
+	}
+
+	public function getTotalPages()
+	{
+		return $this->wpquery->max_num_pages;
 	}
 
 	/**

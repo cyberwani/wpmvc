@@ -2,9 +2,67 @@
 
 namespace wpmvc\Helpers\Query;
 
-class Taxnomy extends Base
+class Taxonomy extends Base
 {
+	/**
+	 * Mapping a nice taxonomy name
+	 * to a WordPress taxonomy name
+	 * @var array
+	 */
+	protected $taxMappery = array(
+		"tag" => "post_tag"
+	);
 
+	/**
+	 * Taxonomy to query.
+	 * @var string
+	 */
+	protected $taxonomy;
+
+	public function __construct($options = array())
+	{
+		// if not set in options, get posts per page from WP admin
+		if (!isset($options["per_page"])) {
+			$options["per_page"] = get_option("posts_per_page");
+		}
+
+		if (!isset($options["page"])) {
+			$options["page"] = 1;
+		}
+
+		parent::__construct($options);
+
+		if (in_array($options["taxonomy"], $this->taxMappery)) {
+			$this->taxonomy = $this->taxMappery[$options["taxonomy"]];
+		} else {
+			$this->taxonomy = $options["taxonomy"];
+		}
+	}
+
+	public function run()
+	{
+		if (isset($this->options["id"])) {
+			return array(get_term($this->options["id"], $this->taxonomy));
+		} else {
+			return get_terms($this->taxonomy, $this->queryArgs);
+		}
+	}
+
+	public function getCurrentPage()
+	{
+		return $this->options["page"];
+	}
+
+	public function getTotalPages()
+	{
+		if (isset($this->options["id"])) {
+			return 1;
+		}
+		$total = wp_count_terms($this->taxonomy);
+		$per_page = $this->options["per_page"];
+		
+		return round($total / $per_page, 0, PHP_ROUND_HALF_UP);
+	}
 
 	/**
 	 * Converts the parent option into WP_Query friendly arguments.
