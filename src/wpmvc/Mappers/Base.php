@@ -250,10 +250,17 @@ abstract class Base
 		$terms = array();
 
 		foreach ($taxonomies as $taxonomy) {
+			$args = array(
+				"post_id" => $item->ID,
+				"taxonomy" => $taxonomy
+			);
+			$mapper = new TermMapper($args);
+			$mapper->findMany();
+
 			$nickname = str_replace("post_", "", $taxonomy);
-			$terms[$nickname] = wp_get_post_terms($item->ID, $taxonomy);
+			$terms[$nickname] = $mapper->data["results"];
+
 			$terms[$nickname] = array_map(function($term) use ($taxonomy) {
-				$term->url = get_term_link($term, $taxonomy);
 				return new \wpmvc\Models\Term($term);
 			}, $terms[$nickname]);
 		}

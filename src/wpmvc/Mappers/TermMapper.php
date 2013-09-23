@@ -73,6 +73,7 @@ class TermMapper extends Base
 
 	protected function wpmvcAddData($item)
 	{
+		$item->url = get_term_link((int) $item->term_id, $this->options["taxonomy"]);
 		return $item;
 	}
 }

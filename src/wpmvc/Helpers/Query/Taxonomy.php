@@ -10,7 +10,7 @@ class Taxonomy extends Base
 	 * @var array
 	 */
 	protected $taxMappery = array(
-		"tag" => "post_tag"
+		"post_tag" => "tag"
 	);
 
 	/**
@@ -43,6 +43,10 @@ class Taxonomy extends Base
 	{
 		if (isset($this->options["id"])) {
 			return array(get_term($this->options["id"], $this->taxonomy));
+		
+		} else if (isset($this->options["post_id"])) {
+			return wp_get_post_terms($this->options["post_id"], $this->taxonomy);
+		
 		} else {
 			return get_terms($this->taxonomy, $this->queryArgs);
 		}
