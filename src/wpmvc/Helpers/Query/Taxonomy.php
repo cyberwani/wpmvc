@@ -86,7 +86,7 @@ class Taxonomy extends Base
 	 */
 	protected function build__page($v)
 	{
-		$this->queryArgs["offset"] = $v;
+		$this->queryArgs["offset"] = ($v - 1) * $this->options["per_page"];
 		return $this;
 	}
 
