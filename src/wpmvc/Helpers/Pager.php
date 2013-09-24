@@ -25,11 +25,16 @@ class Pager
 
 	public function paginate()
 	{
+		if (!is_null($this->id)) {
+			global $post;
+			$post = get_post($this->id);
+		}
+
 		return array(
 			"currentPage" => $this->currentPage,
 			"total" => $this->getTotalPages(),
-			"prevPage" => $this->prevPage(),
-			"nextPage" => $this->nextPage()
+			"prev" => $this->prevPage(),
+			"next" => $this->nextPage()
 		);
 	}
 
@@ -46,10 +51,7 @@ class Pager
 			"id" => $post->ID,
 			"slug" => $post->post_name,
 			"pubDate" => strtotime($post->post_date_gmt),
-			"author" => $author,
-			"categories" => wp_get_post_terms($post->ID, "category"),
-			"tags" => wp_get_post_terms($post->ID)
-
+			"author" => $author
 		);
 	}
 
