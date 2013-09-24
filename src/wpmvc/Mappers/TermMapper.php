@@ -8,10 +8,6 @@ class TermMapper extends Base
 {
 	protected $object = "Term";
 
-	/**
-	 * Initiates hydration
-	 * @param array $options Key/value query options
-	 */
 	public function __construct($options)
 	{
 		if (!isset($options["taxonomy"])) {

@@ -8,42 +8,42 @@ class AuthorMapper extends Base
 {
 	protected $object = "Author";
 
-	/**
-	 * Initiates hydration
-	 * @param array $options Key/value query options
-	 */
-	public function __construct($id)
+	public function __construct($options)
 	{
-		$this->id = $id;
+		parent::__construct($options);
+	}
+
+	public function find()
+	{
+		$this->query = new \wpmvc\Helpers\Query\Author($this->options);
+		$results = $this->query->run();
+		return $this->mapExtraDataToEachResult($results);
 	}
 
 	public function findOne()
 	{
-		$userObject = get_userdata($this->id);
-		$user = $this->extract($userObject);
-		$this->data = $this->hydrate($user);
+		$found = $this->find();
+		$recordset = array_shift($found);
+		$this->data = $this->hydrate($recordset);
 		$this->wpmvcAddToPayload();
 		$this->addToPayload();
 		return $this->data;
 	}
 
-	/**
-	 * Extract properties out of the user object
-	 * @param  WP_User $userObject
-	 * @return object Object with extracted properties
-	 *                from the WP_User object.
-	 */
-	public function extract($userObject)
+	// admin isn't returned -- why?
+	public function findMany()
 	{
-		$user = new \StdClass();
-		$user->id = $userObject->ID;
-		$user->display_name = $userObject->display_name;
-		$user->first_name = $userObject->user_firstname;
-		$user->last_name = $userObject->user_lastname;
-		$user->email = $userObject->user_email;
-		$user->url = $userObject->user_url;
-		$user->description = $userObject->description;
-		return $user;
+		$recordset = $this->find();
+		$this->data = $this->hydrate($recordset);
+		$this->wpmvcAddToPayload();
+		$this->addPagination();
+		$this->addToPayload();
+		return $this->data;
+	}
+
+	protected function wpmvcAddData($item)
+	{
+		return $item;
 	}
 
 	protected function hydrate($recordset)
@@ -55,7 +55,7 @@ class AuthorMapper extends Base
 		else if (is_array($recordset)) {
 
 			$data = array_map(function($item) {
-				$model = ClassFinder::find("Models", ucfirst($item->object));
+				$model = ClassFinder::find("Models", ucfirst($this->object));
 				return new $model($item);
 			}, $recordset);
 

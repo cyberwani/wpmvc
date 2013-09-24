@@ -295,7 +295,10 @@ abstract class Base
 	 */
 	protected function getAuthor($item)
 	{
-		$mapper = new AuthorMapper($item->post_author);
+		$args = array(
+			"id" => $item->post_author
+		);
+		$mapper = new AuthorMapper($args);
 		$mapper->findOne();
 		return $mapper->data["results"];
 	}
