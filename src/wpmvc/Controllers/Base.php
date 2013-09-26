@@ -90,7 +90,7 @@ abstract class Base
 	 * slug {string}		Post slug.
 	 *
 	 * type {string}    	The type of content to retrieve -- either post, page, attachment,
-	 * 						or a custom post type. Default: post
+	 * 						custom post type, author, or term. Default: post
 	 *
 	 * year {int}			Retrieves content published during a specific year (YYYY)
 	 *
